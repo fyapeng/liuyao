@@ -10,7 +10,7 @@ export function AnalysisPanel({ category }: AnalysisPanelProps) {
   const hits = ruleEngine(category);
 
   return (
-    <section className="panel-card ornate-panel">
+    <section className="panel-card ornate-panel analysis-panel">
       <div className="section-head">
         <div>
           <p className="section-kicker">Assistive Reading</p>

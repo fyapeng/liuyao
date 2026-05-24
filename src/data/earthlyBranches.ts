@@ -1,7 +1,7 @@
 export interface EarthlyBranch {
   key: string;
   label: string;
-  wuxing?: string;
+  wuxing: "木" | "火" | "土" | "金" | "水";
 }
 
 export const EARTHLY_BRANCHES: EarthlyBranch[] = [
@@ -19,3 +19,6 @@ export const EARTHLY_BRANCHES: EarthlyBranch[] = [
   { key: "hai", label: "亥", wuxing: "水" }
 ];
 
+export const EARTHLY_BRANCH_WUXING = Object.fromEntries(
+  EARTHLY_BRANCHES.map((item) => [item.label, item.wuxing])
+) as Record<string, EarthlyBranch["wuxing"]>;

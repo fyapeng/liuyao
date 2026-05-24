@@ -1,6 +1,9 @@
 export type YinYang = "阴" | "阳";
 export type CoinFace = "字" | "花";
 export type CoinSelection = "字字字" | "字字花" | "字花花" | "花花花";
+export type DayStem = "甲" | "乙" | "丙" | "丁" | "戊" | "己" | "庚" | "辛" | "壬" | "癸";
+export type Wuxing = "木" | "火" | "土" | "金" | "水";
+export type SixRelative = "兄弟" | "子孙" | "妻财" | "官鬼" | "父母";
 
 export interface CoinRule {
   label: CoinSelection;
@@ -72,4 +75,31 @@ export interface RuleHit {
   title: string;
   type: "favorable" | "unfavorable" | "info";
   description: string;
+}
+
+export interface SixGodAssignment {
+  line: number;
+  label: string;
+}
+
+export interface NajiaAssignment {
+  line: number;
+  lineName: string;
+  branch: string;
+  branchElement: Wuxing;
+}
+
+export interface SixRelativeAssignment {
+  line: number;
+  relative: SixRelative;
+  branch: string;
+  branchElement: Wuxing;
+}
+
+export interface ShiYingInfo {
+  shi: 1 | 2 | 3 | 4 | 5 | 6 | null;
+  ying: 1 | 2 | 3 | 4 | 5 | 6 | null;
+  palace: string | null;
+  palaceElement: Wuxing | null;
+  message: string;
 }

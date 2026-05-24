@@ -13,7 +13,7 @@ import {
   selectionToCoinFaces
 } from "../src/lib/castHexagram.ts";
 import { buildHexagramResult } from "../src/lib/getHexagramName.ts";
-import type { CoinFace, CoinSelection, QuestionCategoryKey } from "../src/types/index.ts";
+import type { CoinFace, CoinSelection, DayStem, QuestionCategoryKey } from "../src/types/index.ts";
 
 const defaultSelections: CoinSelection[] = ["字字花", "字字花", "字字花", "字字花", "字字花", "字字花"];
 const exampleSelections: CoinSelection[] = ["字字花", "字字花", "花花花", "字字花", "字花花", "字花花"];
@@ -25,6 +25,7 @@ function selectionsToCoinLines(selections: CoinSelection[]): [CoinFace, CoinFace
 export default function HomePage() {
   const [question, setQuestion] = useState("这篇论文这一轮投稿是否能顺利推进？");
   const [category, setCategory] = useState<QuestionCategoryKey>("论文投稿");
+  const [dayStem, setDayStem] = useState<DayStem>("甲");
   const [coinLines, setCoinLines] = useState<[CoinFace, CoinFace, CoinFace][]>(selectionsToCoinLines(defaultSelections));
 
   const selections = useMemo(() => coinLinesToSelections(coinLines), [coinLines]);
@@ -33,12 +34,15 @@ export default function HomePage() {
   return (
     <main className="page-shell">
       <section className="hero-stage">
+        <div className="hero-ornament hero-ornament-left" />
+        <div className="hero-ornament hero-ornament-right" />
+
         <div className="hero-card hero-main">
           <div className="hero-copy">
             <p className="eyebrow">Liuyao Casting System v1</p>
             <h1>六爻排盘，不止是算出一卦，更要看清每一次起势。</h1>
             <p className="hero-text">
-              这一版先把起卦体验做得更像真实桌面操作：逐枚落币、自动合并成爻、即时生成本卦与变卦。后续纳甲、世应、六亲、六神与规则命中分析，都将在这套结构上继续长出来。
+              这一版把起卦体验做得更像真实桌面操作：逐枚落币、自动合并成爻、即时生成本卦与变卦，并开始展示世应、纳甲、六亲与六神等基础排盘信息。
             </p>
 
             <div className="hero-actions">
@@ -49,6 +53,7 @@ export default function HomePage() {
                 onClick={() => {
                   setCategory("论文投稿");
                   setQuestion("这篇论文这一轮投稿是否能顺利推进？");
+                  setDayStem("甲");
                   setCoinLines(selectionsToCoinLines(exampleSelections));
                 }}
               >
@@ -60,6 +65,7 @@ export default function HomePage() {
                 onClick={() => {
                   setCategory("其它杂占");
                   setQuestion("");
+                  setDayStem("甲");
                   setCoinLines(selectionsToCoinLines(defaultSelections));
                 }}
               >
@@ -91,14 +97,16 @@ export default function HomePage() {
             categories={QUESTION_CATEGORIES}
             question={question}
             selectedCategory={category}
+            dayStem={dayStem}
             onQuestionChange={setQuestion}
             onCategoryChange={setCategory}
+            onDayStemChange={setDayStem}
           />
           <CoinSelector coinLines={coinLines} onChange={(value) => setCoinLines(value as [CoinFace, CoinFace, CoinFace][])} />
         </div>
 
         <div className="stack-column">
-          <HexagramResult result={result} question={question} selectedCategory={category} />
+          <HexagramResult result={result} question={question} selectedCategory={category} dayStem={dayStem} />
           <AnalysisPanel category={QUESTION_CATEGORIES[category]} />
         </div>
       </section>
@@ -106,7 +114,7 @@ export default function HomePage() {
       <section className="footer-grid">
         <div className="placeholder-card">
           <h2>规则分析</h2>
-          <p>规则命中、有利因素、不利因素分析将在后续版本加入。</p>
+          <p>规则命中、有利因素、不利因素分析将在后续版本加入，当前已为排盘层打好数据基础。</p>
         </div>
         <div className="placeholder-card">
           <h2>案例记录</h2>

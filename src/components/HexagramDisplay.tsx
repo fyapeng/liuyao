@@ -1,14 +1,35 @@
 import { LineDisplay } from "./LineDisplay.tsx";
-import type { CastLineDetail, Hexagram } from "../types/index.ts";
+import type {
+  CastLineDetail,
+  Hexagram,
+  NajiaAssignment,
+  SixGodAssignment,
+  SixRelativeAssignment
+} from "../types/index.ts";
 
 interface HexagramDisplayProps {
   title: string;
   hexagram: Hexagram | null;
   details: CastLineDetail[];
   mode: "original" | "changed";
+  shi?: number | null;
+  ying?: number | null;
+  sixGods?: SixGodAssignment[];
+  najiaAssignments?: NajiaAssignment[];
+  relativeAssignments?: SixRelativeAssignment[];
 }
 
-export function HexagramDisplay({ title, hexagram, details, mode }: HexagramDisplayProps) {
+export function HexagramDisplay({
+  title,
+  hexagram,
+  details,
+  mode,
+  shi,
+  ying,
+  sixGods = [],
+  najiaAssignments = [],
+  relativeAssignments = []
+}: HexagramDisplayProps) {
   return (
     <section className="hexagram-card">
       <div className="hexagram-header">
@@ -23,9 +44,24 @@ export function HexagramDisplay({ title, hexagram, details, mode }: HexagramDisp
       </div>
 
       <div className="hexagram-lines">
-        {[...details].reverse().map((detail) => (
-          <LineDisplay key={`${mode}-${detail.position}`} detail={detail} mode={mode} />
-        ))}
+        {[...details].reverse().map((detail) => {
+          const sixGod = sixGods.find((item) => item.line === detail.position)?.label;
+          const najia = najiaAssignments.find((item) => item.line === detail.position);
+          const relative = relativeAssignments.find((item) => item.line === detail.position)?.relative;
+
+          return (
+            <LineDisplay
+              key={`${mode}-${detail.position}`}
+              detail={detail}
+              mode={mode}
+              shi={detail.position === shi}
+              ying={detail.position === ying}
+              sixGod={sixGod}
+              najia={najia ? `${najia.branch}${najia.branchElement}` : undefined}
+              relative={relative}
+            />
+          );
+        })}
       </div>
     </section>
   );

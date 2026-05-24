@@ -15,14 +15,19 @@ export function CoinSelector({ coinLines, onChange }: CoinSelectorProps) {
     onChange(next);
   };
 
+  const toggleCoin = (lineIndex: number, coinIndex: number) => {
+    const current = coinLines[lineIndex][coinIndex];
+    updateCoin(lineIndex, coinIndex, current === "字" ? "花" : "字");
+  };
+
   return (
-    <section className="panel-card ornate-panel">
+    <section className="panel-card ornate-panel coin-panel">
       <div className="section-head">
         <div>
           <p className="section-kicker">Manual Casting</p>
           <h2>逐枚选择硬币</h2>
         </div>
-        <p className="muted-text">每一爻用三枚硬币表示，共 18 次选择。系统会自动汇总成 6 / 7 / 8 / 9。</p>
+        <p className="muted-text">每一爻用三枚硬币表示，共 18 次选择。点击硬币即可在“字 / 花”之间翻面切换。</p>
       </div>
 
       <div className="coin-line-grid">
@@ -43,19 +48,16 @@ export function CoinSelector({ coinLines, onChange }: CoinSelectorProps) {
                 {line.map((face, coinIndex) => (
                   <div key={`${lineIndex}-${coinIndex}`} className="single-coin-group">
                     <span className="coin-index">第 {coinIndex + 1} 枚</span>
-                    <div className="coin-face-toggle">
-                      {(["字", "花"] as const).map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          className={`coin-token ${face === option ? "active" : ""} ${option === "字" ? "coin-zi" : "coin-hua"}`}
-                          onClick={() => updateCoin(lineIndex, coinIndex, option)}
-                        >
-                          <span className="coin-ring" />
-                          <span className="coin-label">{option}</span>
-                        </button>
-                      ))}
-                    </div>
+                    <button
+                      type="button"
+                      className={`coin-token coin-single ${face === "字" ? "coin-zi" : "coin-hua"} active`}
+                      onClick={() => toggleCoin(lineIndex, coinIndex)}
+                    >
+                      <span className="coin-ring" />
+                      <span className="coin-face-shadow">{face === "字" ? "花" : "字"}</span>
+                      <span className="coin-label">{face}</span>
+                      <span className="coin-hint">点击翻面</span>
+                    </button>
                   </div>
                 ))}
               </div>
