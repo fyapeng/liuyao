@@ -1,0 +1,24 @@
+{
+  "name": "liuyao",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "node --test --experimental-strip-types --experimental-specifier-resolution=node tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "next": "^15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.8",
+    "typescript": "^5.8.3"
+  }
+}
