@@ -8,16 +8,16 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["应爻", "世爻"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "感情类占问通常结合提问者身份细分用神。男问感情多以妻财为主，女问感情多以官鬼为主，并参考世应互动。"
+    notes: "感情婚姻类占问通常先区分提问者身份，再结合世应关系、动爻位置与后续用神规则综合判断。"
   },
   正缘桃花: {
     key: "正缘桃花",
     label: "正缘桃花",
     primaryYongShen: "结合提问身份判断：男看妻财，女看官鬼",
-    secondaryReferences: ["子孙", "应爻", "世爻"],
+    secondaryReferences: ["应爻", "世爻", "子孙"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "用于判断缘分出现、互动意愿与关系推进节奏，后续可扩展桃花、合冲与世应规则。"
+    notes: "用于观察缘分出现、彼此吸引、关系推进节奏，后续可扩展桃花、合冲与世应规则。"
   },
   财运生意: {
     key: "财运生意",
@@ -26,7 +26,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["世爻", "应爻", "官鬼"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "财运与生意以财爻为主，后续会加入财源、阻力、合作对象与风险控制相关规则。"
+    notes: "财运与生意以财爻为主，后续会加入回款、竞争、阻力与合作对象相关规则。"
   },
   求职事业: {
     key: "求职事业",
@@ -35,7 +35,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["父母", "世爻", "应爻"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "官鬼可代表职位、约束、制度与压力，父母可参考简历、文书、证明材料。"
+    notes: "官鬼可代表职位、制度与压力，父母可参考简历、证明、通知与流程文件。"
   },
   学业考试: {
     key: "学业考试",
@@ -44,7 +44,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["官鬼", "世爻", "子孙"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "父母可代表试卷、成绩、文书与学习成果，官鬼也可表示考试压力与制度门槛。"
+    notes: "父母可代表试卷、成绩、材料与学习成果，官鬼也可代表考试压力和门槛。"
   },
   论文投稿: {
     key: "论文投稿",
@@ -62,7 +62,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["官鬼", "应爻", "世爻"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "常用于申请材料、审批文件、盖章流程与制度门槛分析。"
+    notes: "适用于申请材料、审批文件、盖章流程与制度门槛分析。"
   },
   消息联络: {
     key: "消息联络",
@@ -71,7 +71,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["应爻", "世爻", "子孙"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "可用于判断回复速度、沟通意愿与消息是否顺利到达。"
+    notes: "用于观察消息是否送达、是否回复、互动速度以及沟通意愿。"
   },
   疾病健康: {
     key: "疾病健康",
@@ -80,7 +80,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["子孙", "世爻", "父母"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "健康议题后续会补充六亲、六神与日月旺衰，不在第一版做结论性判断。"
+    notes: "当前版本不做医学性结论，只保留后续六亲、六神、旺衰与规则分析接口。"
   },
   官司纠纷: {
     key: "官司纠纷",
@@ -89,7 +89,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["父母", "应爻", "世爻"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "适用于法务、争议、仲裁与制度博弈，后续可扩展文书证据与胜负倾向规则。"
+    notes: "适用于争议、程序推进、文书证据与制度博弈场景。"
   },
   出行迁移: {
     key: "出行迁移",
@@ -98,7 +98,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["应爻", "子孙", "官鬼"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "后续将结合冲合、动变与空亡查看出行阻碍、顺利程度与环境变化。"
+    notes: "后续将结合动变、空亡、合冲与环境变化判断出行阻碍和迁移走势。"
   },
   寻人寻物: {
     key: "寻人寻物",
@@ -116,7 +116,7 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["世爻", "妻财", "官鬼"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "重点看双方互动、利益点、规则阻碍与项目推进节奏。"
+    notes: "重点看双方互动、资源匹配、利益点与项目推进节奏。"
   },
   其它杂占: {
     key: "其它杂占",
@@ -125,9 +125,6 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
     secondaryReferences: ["世爻", "应爻"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "用于暂时无法归类的问题。后续可加入更细分类和取用神引导。"
+    notes: "用于暂时无法归类的问题，后续可加入更细的引导与取用神模板。"
   }
 };
-
-export const QUESTION_CATEGORY_LIST = Object.values(QUESTION_CATEGORIES);
-

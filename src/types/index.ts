@@ -1,5 +1,5 @@
 export type YinYang = "阴" | "阳";
-
+export type CoinFace = "字" | "花";
 export type CoinSelection = "字字字" | "字字花" | "字花花" | "花花花";
 
 export interface CoinRule {
@@ -73,4 +73,3 @@ export interface RuleHit {
   type: "favorable" | "unfavorable" | "info";
   description: string;
 }
-

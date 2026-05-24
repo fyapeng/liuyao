@@ -30,4 +30,3 @@ export function HexagramDisplay({ title, hexagram, details, mode }: HexagramDisp
     </section>
   );
 }
-

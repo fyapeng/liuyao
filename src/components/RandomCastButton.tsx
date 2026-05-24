@@ -9,4 +9,3 @@ export function RandomCastButton({ onGenerate }: RandomCastButtonProps) {
     </button>
   );
 }
-

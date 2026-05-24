@@ -10,8 +10,14 @@ export function AnalysisPanel({ category }: AnalysisPanelProps) {
   const hits = ruleEngine(category);
 
   return (
-    <section className="panel-card">
-      <h2>第一版分析面板</h2>
+    <section className="panel-card ornate-panel">
+      <div className="section-head">
+        <div>
+          <p className="section-kicker">Assistive Reading</p>
+          <h2>第一版分析面板</h2>
+        </div>
+      </div>
+
       <div className="analysis-grid">
         <div className="analysis-item">
           <strong>占事分类</strong>
@@ -37,4 +43,3 @@ export function AnalysisPanel({ category }: AnalysisPanelProps) {
     </section>
   );
 }
-

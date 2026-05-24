@@ -1,5 +1,5 @@
 import { COIN_RULES, POSITION_NAMES } from "../data/coinRules.ts";
-import type { CoinSelection, HexagramComputationResult } from "../types/index.ts";
+import type { CoinFace, CoinSelection, HexagramComputationResult } from "../types/index.ts";
 import { changeHexagram } from "./changeHexagram.ts";
 
 export function castHexagram(selections: CoinSelection[]): HexagramComputationResult {
@@ -26,8 +26,30 @@ export function castHexagram(selections: CoinSelection[]): HexagramComputationRe
   };
 }
 
+export function coinFacesToSelection(faces: CoinFace[]): CoinSelection {
+  const normalized = faces.join("");
+  if (normalized === "字字字" || normalized === "字字花" || normalized === "字花花" || normalized === "花花花") {
+    return normalized;
+  }
+  throw new Error("每一爻必须由三枚“字/花”硬币组成。");
+}
+
+export function selectionToCoinFaces(selection: CoinSelection): [CoinFace, CoinFace, CoinFace] {
+  return selection.split("") as [CoinFace, CoinFace, CoinFace];
+}
+
+export function coinLinesToSelections(lines: CoinFace[][]): CoinSelection[] {
+  if (lines.length !== 6) {
+    throw new Error("起卦需要六组硬币。");
+  }
+  return lines.map((faces) => coinFacesToSelection(faces));
+}
+
 export function generateRandomCoinSelections(): CoinSelection[] {
   const options: CoinSelection[] = ["字字字", "字字花", "字花花", "花花花"];
   return Array.from({ length: 6 }, () => options[Math.floor(Math.random() * options.length)]);
 }
 
+export function generateRandomCoinLines(): [CoinFace, CoinFace, CoinFace][] {
+  return generateRandomCoinSelections().map(selectionToCoinFaces);
+}

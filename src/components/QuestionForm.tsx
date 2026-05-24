@@ -16,9 +16,15 @@ export function QuestionForm({
   onCategoryChange
 }: QuestionFormProps) {
   return (
-    <section className="panel-card">
-      <h2>占事信息</h2>
-      <p className="muted-text">先记录问题与分类，便于后续规则分析、案例保存与复盘。</p>
+    <section className="panel-card ornate-panel">
+      <div className="section-head">
+        <div>
+          <p className="section-kicker">Question Context</p>
+          <h2>占事信息</h2>
+        </div>
+        <p className="muted-text">先记录问题与分类，方便后续规则分析、案例保存与复盘。</p>
+      </div>
+
       <div className="form-grid">
         <div className="field-group">
           <label htmlFor="question">占事问题</label>
@@ -49,4 +55,3 @@ export function QuestionForm({
     </section>
   );
 }
-

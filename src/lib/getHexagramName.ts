@@ -21,4 +21,3 @@ export function buildHexagramResult(selections: CoinSelection[]) {
     changedHexagram
   };
 }
-
