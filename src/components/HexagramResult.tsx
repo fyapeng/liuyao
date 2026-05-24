@@ -14,7 +14,10 @@ export function HexagramResult({ result, question, selectedCategory }: HexagramR
       <h2>排盘结果</h2>
       <div className="tag-row" style={{ marginTop: 12, marginBottom: 16 }}>
         <span className="tag">分类：{selectedCategory}</span>
-        <span className="tag">动爻：{result.movingLinePositions.length > 0 ? result.movingLinePositions.join("、") + "爻" : "无动爻"}</span>
+        <span className="tag">
+          动爻：
+          {result.movingLinePositions.length > 0 ? `${result.movingLinePositions.join("、")}爻` : "无动爻"}
+        </span>
       </div>
 
       {question ? <p className="muted-text">占事问题：{question}</p> : null}
@@ -26,3 +29,4 @@ export function HexagramResult({ result, question, selectedCategory }: HexagramR
     </section>
   );
 }
+

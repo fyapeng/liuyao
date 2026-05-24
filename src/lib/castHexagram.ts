@@ -30,3 +30,4 @@ export function generateRandomCoinSelections(): CoinSelection[] {
   const options: CoinSelection[] = ["字字字", "字字花", "字花花", "花花花"];
   return Array.from({ length: 6 }, () => options[Math.floor(Math.random() * options.length)]);
 }
+

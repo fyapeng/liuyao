@@ -130,3 +130,4 @@ export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> 
 };
 
 export const QUESTION_CATEGORY_LIST = Object.values(QUESTION_CATEGORIES);
+

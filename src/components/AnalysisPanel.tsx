@@ -37,3 +37,4 @@ export function AnalysisPanel({ category }: AnalysisPanelProps) {
     </section>
   );
 }
+

@@ -49,3 +49,4 @@ export const COIN_RULES: Record<CoinSelection, CoinRule> = {
 
 export const COIN_SELECTION_OPTIONS = Object.keys(COIN_RULES) as CoinSelection[];
 export const POSITION_NAMES = ["初爻", "二爻", "三爻", "四爻", "五爻", "上爻"] as const;
+

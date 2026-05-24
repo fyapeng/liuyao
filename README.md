@@ -59,6 +59,27 @@ npm run dev
 npm run test
 ```
 
+## GitHub Pages 部署
+
+这个项目已经预留了 GitHub Pages 自动部署工作流：
+
+- 工作流文件：`.github/workflows/deploy-pages.yml`
+- Next.js 已配置为静态导出：`next.config.ts`
+- 推送到 `main` 后可由 GitHub Actions 自动构建并发布
+
+建议你在 GitHub 仓库中确认以下设置：
+
+1. 进入 `Settings -> Pages`
+2. `Source` 选择 `GitHub Actions`
+3. 保持默认的 `main` 分支触发工作流
+
+如果你要绑定自定义域名，有两种方式：
+
+- 直接在 GitHub Pages 设置页填写自定义域名
+- 或在 `public/CNAME` 中写入你的域名后一起发布
+
+如果你把域名告诉我，我可以直接把 `public/CNAME` 也补进项目里。
+
 当前测试覆盖：
 
 - 硬币规则映射
@@ -110,4 +131,3 @@ npm run test
 9. 有利因素 / 不利因素归纳
 10. 案例保存与复盘
 11. AI 辅助解释接口
-

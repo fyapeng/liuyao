@@ -35,12 +35,6 @@ export interface HexagramComputationResult {
   movingLinePositions: number[];
 }
 
-export interface HexagramViewModel {
-  hexagram: Hexagram | null;
-  details: CastLineDetail[];
-  label: string;
-}
-
 export interface CategoryRuleTemplate {
   id: string;
   title: string;

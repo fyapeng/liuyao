@@ -50,3 +50,4 @@ export function CoinSelector({ selections, onChange }: CoinSelectorProps) {
     </section>
   );
 }
+

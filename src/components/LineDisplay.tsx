@@ -24,8 +24,7 @@ export function LineDisplay({ detail, mode }: LineDisplayProps) {
           )}
         </div>
         <div className="line-meta">
-          {detail.label} = {detail.value} = {detail.name} = {detail.yinYang}爻
-          {detail.isMoving ? "动" : "静"}
+          {detail.label} = {detail.value} = {detail.name} = {detail.yinYang}爻{detail.isMoving ? "动" : "静"}
         </div>
       </div>
 
@@ -33,3 +32,4 @@ export function LineDisplay({ detail, mode }: LineDisplayProps) {
     </div>
   );
 }
+

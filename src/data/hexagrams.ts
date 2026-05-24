@@ -89,3 +89,4 @@ export const HEXAGRAMS: Hexagram[] = HEXAGRAM_CATALOG.map(([key, name, upperTrig
   lowerTrigram,
   lines: buildLines(upperTrigram, lowerTrigram)
 }));
+
