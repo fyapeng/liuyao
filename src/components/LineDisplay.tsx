@@ -5,6 +5,7 @@ interface LineDisplayProps {
   mode: "original" | "changed";
   shi?: boolean;
   ying?: boolean;
+  isYongShen?: boolean;
   sixGod?: string;
   najia?: string;
   relative?: string;
@@ -15,6 +16,7 @@ export function LineDisplay({
   mode,
   shi = false,
   ying = false,
+  isYongShen = false,
   sixGod,
   najia,
   relative
@@ -22,7 +24,11 @@ export function LineDisplay({
   const bit = mode === "original" ? detail.originalLine : detail.changedLine;
 
   return (
-    <div className={`line-display ${shi ? "line-shi" : ""} ${ying ? "line-ying" : ""}`}>
+    <div
+      className={`line-display ${shi ? "line-shi" : ""} ${ying ? "line-ying" : ""} ${
+        isYongShen ? "line-yongshen" : ""
+      }`}
+    >
       <strong>{detail.positionName}</strong>
 
       <div>
@@ -49,6 +55,7 @@ export function LineDisplay({
       </div>
 
       <div className="line-side-tags">
+        {isYongShen ? <span className="line-pill line-pill-yongshen">{"\u7528\u795e"}</span> : null}
         {shi ? <span className="line-pill">{"\u4e16"}</span> : null}
         {ying ? <span className="line-pill">{"\u5e94"}</span> : null}
         <span className="moving-marker">{mode === "original" ? detail.marker || "\u2014" : "\u2192"}</span>

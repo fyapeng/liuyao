@@ -1,36 +1,23 @@
-import type { DayStem, QuestionCategory, QuestionCategoryKey } from "../types/index.ts";
+import type { QuestionCategory, QuestionCategoryKey, TimeContext } from "../types/index.ts";
 
 interface QuestionFormProps {
   categories: Record<QuestionCategoryKey, QuestionCategory>;
   question: string;
   selectedCategory: QuestionCategoryKey;
-  dayStem: DayStem;
+  timeContext: TimeContext;
   onQuestionChange: (value: string) => void;
   onCategoryChange: (value: QuestionCategoryKey) => void;
-  onDayStemChange: (value: DayStem) => void;
+  onRefreshTime: () => void;
 }
-
-const DAY_STEMS = [
-  "\u7532",
-  "\u4e59",
-  "\u4e19",
-  "\u4e01",
-  "\u620a",
-  "\u5df1",
-  "\u5e9a",
-  "\u8f9b",
-  "\u58ec",
-  "\u7678"
-] as const;
 
 export function QuestionForm({
   categories,
   question,
   selectedCategory,
-  dayStem,
+  timeContext,
   onQuestionChange,
   onCategoryChange,
-  onDayStemChange
+  onRefreshTime
 }: QuestionFormProps) {
   return (
     <section className="panel-card ornate-panel">
@@ -41,7 +28,7 @@ export function QuestionForm({
         </div>
         <p className="muted-text">
           {
-            "\u5148\u8bb0\u5f55\u95ee\u9898\u3001\u5206\u7c7b\u4e0e\u8d77\u516d\u795e\u65e5\u5e72\uff0c\u65b9\u4fbf\u540e\u7eed\u89c4\u5219\u5206\u6790\u3001\u6848\u4f8b\u4fdd\u5b58\u4e0e\u590d\u76d8\u3002"
+            "\u5148\u5b9a\u95ee\u9898\u4e0e\u5206\u7c7b\uff0c\u518d\u7528\u5f53\u524d\u65f6\u95f4\u81ea\u52a8\u8d77\u51fa\u65e5\u8fb0\u3001\u6708\u5efa\u4e0e\u65ec\u7a7a\uff0c\u540e\u7eed\u89c4\u5219\u90fd\u4f1a\u6cbf\u8fd9\u6761\u65f6\u95f4\u7ebf\u5c55\u5f00\u3002"
           }
         </p>
       </div>
@@ -73,15 +60,40 @@ export function QuestionForm({
           </select>
         </div>
 
-        <div className="field-group">
-          <label htmlFor="dayStem">{"\u8d77\u516d\u795e\u65e5\u5e72"}</label>
-          <select id="dayStem" value={dayStem} onChange={(event) => onDayStemChange(event.target.value as DayStem)}>
-            {DAY_STEMS.map((stem) => (
-              <option key={stem} value={stem}>
-                {stem}
-              </option>
-            ))}
-          </select>
+        <div className="time-context-card">
+          <div className="time-context-head">
+            <div>
+              <span className="meta-label">{"\u81ea\u52a8\u65f6\u95f4"}</span>
+              <strong>{`${timeContext.dayGanzhi}\u65e5`}</strong>
+            </div>
+            <button className="selector-chip" type="button" onClick={onRefreshTime}>
+              {"\u5237\u65b0\u5f53\u524d\u65f6\u95f4"}
+            </button>
+          </div>
+
+          <div className="time-context-grid">
+            <div className="time-context-item">
+              <span className="meta-label">{"\u516c\u5386"}</span>
+              <span>{timeContext.solarDateLabel}</span>
+            </div>
+            <div className="time-context-item">
+              <span className="meta-label">{"\u519c\u5386"}</span>
+              <span>{timeContext.lunarDateLabel}</span>
+            </div>
+            <div className="time-context-item">
+              <span className="meta-label">{"\u6708\u5efa"}</span>
+              <span>{`${timeContext.monthBuild}\u6708\u5efa`}</span>
+              <small>{timeContext.monthBuildDetail}</small>
+            </div>
+            <div className="time-context-item">
+              <span className="meta-label">{"\u8282\u6c14"}</span>
+              <span>{timeContext.solarTermLabel}</span>
+            </div>
+            <div className="time-context-item">
+              <span className="meta-label">{"\u65ec\u7a7a"}</span>
+              <span>{timeContext.voidBranches.join("\u3001")}</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

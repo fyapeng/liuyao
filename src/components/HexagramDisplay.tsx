@@ -14,6 +14,7 @@ interface HexagramDisplayProps {
   mode: "original" | "changed";
   shi?: number | null;
   ying?: number | null;
+  yongShenLines?: number[];
   sixGods?: SixGodAssignment[];
   najiaAssignments?: NajiaAssignment[];
   relativeAssignments?: SixRelativeAssignment[];
@@ -26,6 +27,7 @@ export function HexagramDisplay({
   mode,
   shi,
   ying,
+  yongShenLines = [],
   sixGods = [],
   najiaAssignments = [],
   relativeAssignments = []
@@ -56,6 +58,7 @@ export function HexagramDisplay({
               mode={mode}
               shi={detail.position === shi}
               ying={detail.position === ying}
+              isYongShen={yongShenLines.includes(detail.position)}
               sixGod={sixGod}
               najia={najia ? `${najia.branch}${najia.branchElement}` : undefined}
               relative={relative}

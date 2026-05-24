@@ -3,7 +3,8 @@ import type {
   DayStem,
   NajiaAssignment,
   SixGodAssignment,
-  SixRelativeAssignment
+  SixRelativeAssignment,
+  TemporalLineStatus
 } from "../types/index.ts";
 
 interface LineDetailLedgerProps {
@@ -12,6 +13,8 @@ interface LineDetailLedgerProps {
   sixGods: SixGodAssignment[];
   najiaAssignments: NajiaAssignment[];
   relativeAssignments: SixRelativeAssignment[];
+  yongShenLines: number[];
+  temporalStatuses: TemporalLineStatus[];
 }
 
 export function LineDetailLedger({
@@ -19,7 +22,9 @@ export function LineDetailLedger({
   dayStem,
   sixGods,
   najiaAssignments,
-  relativeAssignments
+  relativeAssignments,
+  yongShenLines,
+  temporalStatuses
 }: LineDetailLedgerProps) {
   return (
     <section className="panel-card ledger-panel">
@@ -43,6 +48,10 @@ export function LineDetailLedger({
             <span>{"\u516d\u795e"}</span>
             <span>{"\u7eb3\u7532"}</span>
             <span>{"\u516d\u4eb2"}</span>
+            <span>{"\u6708\u5efa"}</span>
+            <span>{"\u65e5\u8fb0"}</span>
+            <span>{"\u7a7a\u4ea1"}</span>
+            <span>{"\u5408\u51b2\u5211\u5bb3"}</span>
             <span>{"\u52a8\u9759"}</span>
           </div>
 
@@ -50,16 +59,22 @@ export function LineDetailLedger({
             const sixGod = sixGods.find((item) => item.line === detail.position);
             const najia = najiaAssignments.find((item) => item.line === detail.position);
             const relative = relativeAssignments.find((item) => item.line === detail.position);
+            const temporal = temporalStatuses.find((item) => item.line === detail.position);
+            const isYongShen = yongShenLines.includes(detail.position);
 
             return (
-              <div key={detail.position} className="ledger-row">
+              <div key={detail.position} className={`ledger-row ${isYongShen ? "ledger-row-yongshen" : ""}`}>
                 <span>{detail.positionName}</span>
                 <span>{detail.label}</span>
                 <span>{detail.value}</span>
                 <span>{detail.name}</span>
                 <span>{sixGod?.label ?? "-"}</span>
                 <span>{najia ? `${najia.branch}${najia.branchElement}` : "-"}</span>
-                <span>{relative?.relative ?? "-"}</span>
+                <span>{relative ? `${relative.relative}${isYongShen ? " \u00b7 \u7528\u795e" : ""}` : "-"}</span>
+                <span>{temporal?.monthState ?? "-"}</span>
+                <span>{temporal?.dayState ?? "-"}</span>
+                <span>{temporal?.voidState ?? "-"}</span>
+                <span>{temporal?.relationSummary ?? "-"}</span>
                 <span>{detail.isMoving ? `\u52a8 ${detail.marker}` : "\u9759"}</span>
               </div>
             );

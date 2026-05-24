@@ -1,25 +1,45 @@
 import { HexagramDisplay } from "./HexagramDisplay.tsx";
 import { HexagramMetaBoard } from "./HexagramMetaBoard.tsx";
 import { LineDetailLedger } from "./LineDetailLedger.tsx";
-import { getNajia } from "../lib/getNajia.ts";
-import { getShiYing } from "../lib/getShiYing.ts";
-import { getSixGods } from "../lib/getSixGods.ts";
-import { getSixRelatives } from "../lib/getSixRelatives.ts";
+import type {
+  DayStem,
+  NajiaAssignment,
+  QuestionCategoryKey,
+  ShiYingInfo,
+  SixGodAssignment,
+  SixRelativeAssignment,
+  TemporalProfile,
+  TimeContext
+} from "../types/index.ts";
 import { buildHexagramResult } from "../lib/getHexagramName.ts";
-import type { DayStem, QuestionCategoryKey } from "../types/index.ts";
 
 interface HexagramResultProps {
   result: ReturnType<typeof buildHexagramResult>;
   question: string;
   selectedCategory: QuestionCategoryKey;
   dayStem: DayStem;
+  timeContext: TimeContext;
+  shiYing: ShiYingInfo;
+  najiaAssignments: NajiaAssignment[];
+  sixGods: SixGodAssignment[];
+  relativeAssignments: SixRelativeAssignment[];
+  temporalProfile: TemporalProfile;
+  yongShenLines: number[];
 }
 
-export function HexagramResult({ result, question, selectedCategory, dayStem }: HexagramResultProps) {
-  const shiYing = getShiYing(result.originalHexagram?.key ?? null, result.originalLines);
-  const najia = getNajia(result.originalLines);
-  const sixGods = getSixGods(result.originalLines, dayStem).gods;
-  const relatives = getSixRelatives(result.originalLines, result.originalHexagram?.key ?? null);
+export function HexagramResult({
+  result,
+  question,
+  selectedCategory,
+  dayStem,
+  timeContext,
+  shiYing,
+  najiaAssignments,
+  sixGods,
+  relativeAssignments,
+  temporalProfile,
+  yongShenLines
+}: HexagramResultProps) {
   const movingLinesText = result.movingLinePositions.length > 0 ? `${result.movingLinePositions.join("\u3001")}\u723b` : "\u65e0\u52a8\u723b";
   const palaceSummary =
     shiYing.palace && shiYing.palaceElement
@@ -37,6 +57,8 @@ export function HexagramResult({ result, question, selectedCategory, dayStem }: 
           <div className="tag-row">
             <span className="tag">{`\u5206\u7c7b\uff1a${selectedCategory}`}</span>
             <span className="tag">{`\u52a8\u723b\uff1a${movingLinesText}`}</span>
+            <span className="tag">{`\u65e5\u8fb0\uff1a${timeContext.dayGanzhi}`}</span>
+            <span className="tag">{`\u6708\u5efa\uff1a${timeContext.monthBuild}`}</span>
           </div>
         </div>
 
@@ -50,9 +72,10 @@ export function HexagramResult({ result, question, selectedCategory, dayStem }: 
             mode="original"
             shi={shiYing.shi}
             ying={shiYing.ying}
+            yongShenLines={yongShenLines}
             sixGods={sixGods}
-            najiaAssignments={najia.assignments}
-            relativeAssignments={relatives.relatives}
+            najiaAssignments={najiaAssignments}
+            relativeAssignments={relativeAssignments}
           />
           <HexagramDisplay
             title="\u53d8\u5366"
@@ -61,9 +84,10 @@ export function HexagramResult({ result, question, selectedCategory, dayStem }: 
             mode="changed"
             shi={shiYing.shi}
             ying={shiYing.ying}
+            yongShenLines={yongShenLines}
             sixGods={sixGods}
-            najiaAssignments={najia.assignments}
-            relativeAssignments={relatives.relatives}
+            najiaAssignments={najiaAssignments}
+            relativeAssignments={relativeAssignments}
           />
         </div>
       </section>
@@ -72,8 +96,10 @@ export function HexagramResult({ result, question, selectedCategory, dayStem }: 
         details={result.details}
         dayStem={dayStem}
         sixGods={sixGods}
-        najiaAssignments={najia.assignments}
-        relativeAssignments={relatives.relatives}
+        najiaAssignments={najiaAssignments}
+        relativeAssignments={relativeAssignments}
+        yongShenLines={yongShenLines}
+        temporalStatuses={temporalProfile.lineStatuses}
       />
 
       <HexagramMetaBoard
@@ -85,8 +111,8 @@ export function HexagramResult({ result, question, selectedCategory, dayStem }: 
         changedLower={result.changedHexagram?.lowerTrigram ?? "-"}
         movingLinesText={movingLinesText}
         shiYingMessage={shiYing.message}
-        najiaMessage={najia.message}
-        relativesMessage={relatives.message}
+        najiaMessage={`\u65e5\u8fb0 ${timeContext.dayGanzhi}\uff0c\u65ec\u7a7a ${timeContext.voidBranches.join("\u3001")}\u3002`}
+        relativesMessage={`\u6708\u5efa ${timeContext.monthBuild}\uff0c${timeContext.monthBuildDetail}\uff0c\u5e76\u5df2\u8054\u52a8\u9010\u723b\u65fa\u8870\u4e0e\u51b2\u5408\u63d0\u793a\u3002`}
         palaceSummary={palaceSummary}
       />
     </>

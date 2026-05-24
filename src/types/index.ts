@@ -12,6 +12,19 @@ export type DayStem =
   | "\u8f9b"
   | "\u58ec"
   | "\u7678";
+export type EarthlyBranchLabel =
+  | "\u5b50"
+  | "\u4e11"
+  | "\u5bc5"
+  | "\u536f"
+  | "\u8fb0"
+  | "\u5df3"
+  | "\u5348"
+  | "\u672a"
+  | "\u7533"
+  | "\u9149"
+  | "\u620c"
+  | "\u4ea5";
 export type Wuxing = "\u6728" | "\u706b" | "\u571f" | "\u91d1" | "\u6c34";
 export type SixRelative = "\u5144\u5f1f" | "\u5b50\u5b59" | "\u59bb\u8d22" | "\u5b98\u9b3c" | "\u7236\u6bcd";
 
@@ -87,6 +100,74 @@ export interface RuleHit {
   description: string;
 }
 
+export interface YongShenMatch {
+  line: number;
+  label: string;
+  source: "relative" | "shi" | "ying";
+  relative?: SixRelative;
+  isMoving: boolean;
+}
+
+export type YongShenRoleType = "\u5143\u795e" | "\u5fcc\u795e" | "\u4ec7\u795e";
+
+export interface YongShenRoleMatch {
+  line: number;
+  role: YongShenRoleType;
+  relative: SixRelative;
+  branchElement: Wuxing;
+  isMoving: boolean;
+  note: string;
+}
+
+export interface YongShenProfile {
+  yongShenMatches: YongShenMatch[];
+  roleMatches: YongShenRoleMatch[];
+  favorableFactors: string[];
+  unfavorableFactors: string[];
+  statusSummary: string[];
+}
+
+export interface TemporalOverviewCard {
+  key: "month" | "day" | "void" | "timestamp";
+  label: string;
+  value: string;
+  note: string;
+  tone: "pending" | "partial" | "ready";
+}
+
+export interface TemporalLineStatus {
+  line: number;
+  monthState: string;
+  dayState: string;
+  voidState: string;
+  relationSummary: string;
+  flags: string[];
+  isVoid: boolean;
+  isMonthBroken: boolean;
+  hasSupport: boolean;
+  hasPressure: boolean;
+}
+
+export interface TemporalProfile {
+  overview: TemporalOverviewCard[];
+  lineStatuses: TemporalLineStatus[];
+}
+
+export interface TimeContext {
+  timestampLabel: string;
+  solarDateLabel: string;
+  lunarDateLabel: string;
+  lunarYearName: string;
+  solarTermLabel: string;
+  monthBuild: EarthlyBranchLabel;
+  monthBuildDetail: string;
+  dayGanzhi: `${DayStem}${EarthlyBranchLabel}`;
+  dayStem: DayStem;
+  dayBranch: EarthlyBranchLabel;
+  voidBranches: [EarthlyBranchLabel, EarthlyBranchLabel];
+  sourceNote: string;
+}
+
 export interface SixGodAssignment {
   line: number;
   label: string;
@@ -121,4 +202,7 @@ export interface RuleEngineContext {
   shiYing: ShiYingInfo;
   relatives: SixRelativeAssignment[];
   details: CastLineDetail[];
+  dayStem: DayStem;
+  timeContext: TimeContext;
+  temporalProfile: TemporalProfile;
 }
