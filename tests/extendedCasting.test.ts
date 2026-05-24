@@ -3,31 +3,38 @@ import assert from "node:assert/strict";
 import { coinLinesToSelections } from "../src/lib/castHexagram.ts";
 import { getSixGods } from "../src/lib/getSixGods.ts";
 
-test("三枚硬币逐枚输入可转换为六次起卦结果", () => {
+test("coin faces convert to selections", () => {
   const selections = coinLinesToSelections([
-    ["字", "字", "字"],
-    ["字", "字", "花"],
-    ["字", "花", "花"],
-    ["花", "花", "花"],
-    ["字", "字", "花"],
-    ["字", "花", "花"]
+    ["\u5b57", "\u5b57", "\u5b57"],
+    ["\u5b57", "\u5b57", "\u82b1"],
+    ["\u5b57", "\u82b1", "\u82b1"],
+    ["\u82b1", "\u82b1", "\u82b1"],
+    ["\u5b57", "\u5b57", "\u82b1"],
+    ["\u5b57", "\u82b1", "\u82b1"]
   ]);
 
-  assert.deepEqual(selections, ["字字字", "字字花", "字花花", "花花花", "字字花", "字花花"]);
+  assert.deepEqual(selections, [
+    "\u5b57\u5b57\u5b57",
+    "\u5b57\u5b57\u82b1",
+    "\u5b57\u82b1\u82b1",
+    "\u82b1\u82b1\u82b1",
+    "\u5b57\u5b57\u82b1",
+    "\u5b57\u82b1\u82b1"
+  ]);
 });
 
-test("甲日起六神应从青龙开始顺排", () => {
-  const result = getSixGods([1, 1, 1, 1, 1, 1], "甲");
+test("six gods from jia day stem", () => {
+  const result = getSixGods([1, 1, 1, 1, 1, 1], "\u7532");
   assert.deepEqual(
     result.gods.map((item) => item.label),
-    ["青龙", "朱雀", "勾陈", "螣蛇", "白虎", "玄武"]
+    ["\u9752\u9f99", "\u6731\u96c0", "\u52fe\u9648", "\u817e\u86c7", "\u767d\u864e", "\u7384\u6b66"]
   );
 });
 
-test("庚日起六神应从白虎开始顺排", () => {
-  const result = getSixGods([1, 1, 1, 1, 1, 1], "庚");
+test("six gods from geng day stem", () => {
+  const result = getSixGods([1, 1, 1, 1, 1, 1], "\u5e9a");
   assert.deepEqual(
     result.gods.map((item) => item.label),
-    ["白虎", "玄武", "青龙", "朱雀", "勾陈", "螣蛇"]
+    ["\u767d\u864e", "\u7384\u6b66", "\u9752\u9f99", "\u6731\u96c0", "\u52fe\u9648", "\u817e\u86c7"]
   );
 });

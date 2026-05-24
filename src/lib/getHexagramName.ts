@@ -7,7 +7,7 @@ export function getHexagramByLines(lines: Hexagram["lines"]) {
 }
 
 export function getHexagramName(lines: Hexagram["lines"]) {
-  return getHexagramByLines(lines)?.name ?? "未知卦";
+  return getHexagramByLines(lines)?.name ?? "\u672a\u77e5\u5366";
 }
 
 export function buildHexagramResult(selections: CoinSelection[]) {

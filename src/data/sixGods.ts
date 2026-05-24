@@ -5,10 +5,10 @@ export interface SixGod {
 }
 
 export const SIX_GODS: SixGod[] = [
-  { key: "qing-long", label: "青龙", notes: "甲乙日起青龙。" },
-  { key: "zhu-que", label: "朱雀", notes: "丙丁日起朱雀。" },
-  { key: "gou-chen", label: "勾陈", notes: "戊日起勾陈。" },
-  { key: "teng-she", label: "螣蛇", notes: "己日起螣蛇。" },
-  { key: "bai-hu", label: "白虎", notes: "庚辛日起白虎。" },
-  { key: "xuan-wu", label: "玄武", notes: "壬癸日起玄武。" }
+  { key: "qing-long", label: "\u9752\u9f99", notes: "\u7532\u4e59\u65e5\u8d77\u9752\u9f99\u3002" },
+  { key: "zhu-que", label: "\u6731\u96c0", notes: "\u4e19\u4e01\u65e5\u8d77\u6731\u96c0\u3002" },
+  { key: "gou-chen", label: "\u52fe\u9648", notes: "\u620a\u65e5\u8d77\u52fe\u9648\u3002" },
+  { key: "teng-she", label: "\u817e\u86c7", notes: "\u5df1\u65e5\u8d77\u817e\u86c7\u3002" },
+  { key: "bai-hu", label: "\u767d\u864e", notes: "\u5e9a\u8f9b\u65e5\u8d77\u767d\u864e\u3002" },
+  { key: "xuan-wu", label: "\u7384\u6b66", notes: "\u58ec\u7678\u65e5\u8d77\u7384\u6b66\u3002" }
 ];

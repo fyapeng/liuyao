@@ -8,7 +8,7 @@ export function getShiYing(hexagramKey?: string | null, _lines?: Hexagram["lines
       ying: null,
       palace: null,
       palaceElement: null,
-      message: "未能匹配八宫信息，暂无法定位世应。"
+      message: "\u672a\u80fd\u5339\u914d\u516b\u5bab\u4fe1\u606f\uff0c\u6682\u65f6\u65e0\u6cd5\u5b9a\u4f4d\u4e16\u5e94\u3002"
     };
   }
 
@@ -18,6 +18,8 @@ export function getShiYing(hexagramKey?: string | null, _lines?: Hexagram["lines
     ying: matched.ying,
     palace: matched.palace,
     palaceElement: matched.palaceElement,
-    message: `${matched.palace}宫卦，世在${matched.shi}爻，应在${matched.ying}爻，宫五行为${matched.palaceElement}。`
+    message:
+      `${matched.palace}\u5bab\u5366\uff0c\u4e16\u5728${matched.shi}\u723b\uff0c` +
+      `\u5e94\u5728${matched.ying}\u723b\uff0c\u5bab\u4e94\u884c\u4e3a${matched.palaceElement}\u3002`
   };
 }

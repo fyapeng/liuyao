@@ -5,7 +5,7 @@ interface RandomCastButtonProps {
 export function RandomCastButton({ onGenerate }: RandomCastButtonProps) {
   return (
     <button className="action-button" type="button" onClick={onGenerate}>
-      随机起卦
+      {"\u968f\u673a\u8d77\u5366"}
     </button>
   );
 }

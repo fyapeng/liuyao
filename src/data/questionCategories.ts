@@ -1,130 +1,146 @@
 import type { QuestionCategory, QuestionCategoryKey } from "../types/index.ts";
 
 export const QUESTION_CATEGORIES: Record<QuestionCategoryKey, QuestionCategory> = {
-  感情婚姻: {
-    key: "感情婚姻",
-    label: "感情婚姻",
-    primaryYongShen: "结合提问身份判断：男看妻财，女看官鬼",
-    secondaryReferences: ["应爻", "世爻"],
+  "\u611f\u60c5\u5a5a\u59fb": {
+    key: "\u611f\u60c5\u5a5a\u59fb",
+    label: "\u611f\u60c5\u5a5a\u59fb",
+    primaryYongShen:
+      "\u7ed3\u5408\u63d0\u95ee\u8eab\u4efd\u5224\u65ad\uff1a\u7537\u770b\u59bb\u8d22\uff0c\u5973\u770b\u5b98\u9b3c",
+    secondaryReferences: ["\u5e94\u723b", "\u4e16\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "感情婚姻类占问通常先区分提问者身份，再结合世应关系、动爻位置与后续用神规则综合判断。"
+    notes:
+      "\u611f\u60c5\u5a5a\u59fb\u7c7b\u5360\u95ee\u901a\u5e38\u5148\u533a\u5206\u63d0\u95ee\u8005\u8eab\u4efd\uff0c\u518d\u7ed3\u5408\u4e16\u5e94\u5173\u7cfb\u3001\u52a8\u723b\u4f4d\u7f6e\u4e0e\u540e\u7eed\u7528\u795e\u89c4\u5219\u7efc\u5408\u5224\u65ad\u3002"
   },
-  正缘桃花: {
-    key: "正缘桃花",
-    label: "正缘桃花",
-    primaryYongShen: "结合提问身份判断：男看妻财，女看官鬼",
-    secondaryReferences: ["应爻", "世爻", "子孙"],
+  "\u6b63\u7f18\u6843\u82b1": {
+    key: "\u6b63\u7f18\u6843\u82b1",
+    label: "\u6b63\u7f18\u6843\u82b1",
+    primaryYongShen:
+      "\u7ed3\u5408\u63d0\u95ee\u8eab\u4efd\u5224\u65ad\uff1a\u7537\u770b\u59bb\u8d22\uff0c\u5973\u770b\u5b98\u9b3c",
+    secondaryReferences: ["\u5e94\u723b", "\u4e16\u723b", "\u5b50\u5b59"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "用于观察缘分出现、彼此吸引、关系推进节奏，后续可扩展桃花、合冲与世应规则。"
+    notes:
+      "\u7528\u4e8e\u89c2\u5bdf\u7f18\u5206\u51fa\u73b0\u3001\u5f7c\u6b64\u5438\u5f15\u4e0e\u5173\u7cfb\u63a8\u8fdb\u8282\u594f\uff0c\u540e\u7eed\u53ef\u6269\u5c55\u6843\u82b1\u3001\u5408\u51b2\u4e0e\u4e16\u5e94\u89c4\u5219\u3002"
   },
-  财运生意: {
-    key: "财运生意",
-    label: "财运生意",
-    primaryYongShen: "妻财",
-    secondaryReferences: ["世爻", "应爻", "官鬼"],
+  "\u8d22\u8fd0\u751f\u610f": {
+    key: "\u8d22\u8fd0\u751f\u610f",
+    label: "\u8d22\u8fd0\u751f\u610f",
+    primaryYongShen: "\u59bb\u8d22",
+    secondaryReferences: ["\u4e16\u723b", "\u5e94\u723b", "\u5b98\u9b3c"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "财运与生意以财爻为主，后续会加入回款、竞争、阻力与合作对象相关规则。"
+    notes:
+      "\u8d22\u8fd0\u4e0e\u751f\u610f\u4ee5\u8d22\u723b\u4e3a\u4e3b\uff0c\u540e\u7eed\u4f1a\u52a0\u5165\u56de\u6b3e\u3001\u7ade\u4e89\u3001\u963b\u529b\u4e0e\u5408\u4f5c\u5bf9\u8c61\u76f8\u5173\u89c4\u5219\u3002"
   },
-  求职事业: {
-    key: "求职事业",
-    label: "求职事业",
-    primaryYongShen: "官鬼",
-    secondaryReferences: ["父母", "世爻", "应爻"],
+  "\u6c42\u804c\u4e8b\u4e1a": {
+    key: "\u6c42\u804c\u4e8b\u4e1a",
+    label: "\u6c42\u804c\u4e8b\u4e1a",
+    primaryYongShen: "\u5b98\u9b3c",
+    secondaryReferences: ["\u7236\u6bcd", "\u4e16\u723b", "\u5e94\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "官鬼可代表职位、制度与压力，父母可参考简历、证明、通知与流程文件。"
+    notes:
+      "\u5b98\u9b3c\u53ef\u4ee3\u8868\u804c\u4f4d\u3001\u5236\u5ea6\u4e0e\u538b\u529b\uff0c\u7236\u6bcd\u53ef\u53c2\u8003\u7b80\u5386\u3001\u8bc1\u660e\u3001\u901a\u77e5\u4e0e\u6d41\u7a0b\u6587\u4ef6\u3002"
   },
-  学业考试: {
-    key: "学业考试",
-    label: "学业考试",
-    primaryYongShen: "父母",
-    secondaryReferences: ["官鬼", "世爻", "子孙"],
+  "\u5b66\u4e1a\u8003\u8bd5": {
+    key: "\u5b66\u4e1a\u8003\u8bd5",
+    label: "\u5b66\u4e1a\u8003\u8bd5",
+    primaryYongShen: "\u7236\u6bcd",
+    secondaryReferences: ["\u5b98\u9b3c", "\u4e16\u723b", "\u5b50\u5b59"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "父母可代表试卷、成绩、材料与学习成果，官鬼也可代表考试压力和门槛。"
+    notes:
+      "\u7236\u6bcd\u53ef\u4ee3\u8868\u8bd5\u5377\u3001\u6210\u7ee9\u3001\u6750\u6599\u4e0e\u5b66\u4e60\u6210\u679c\uff0c\u5b98\u9b3c\u4e5f\u53ef\u4ee3\u8868\u8003\u8bd5\u538b\u529b\u548c\u95e8\u69db\u3002"
   },
-  论文投稿: {
-    key: "论文投稿",
-    label: "论文投稿",
-    primaryYongShen: "父母",
-    secondaryReferences: ["官鬼", "应爻", "世爻"],
+  "\u8bba\u6587\u6295\u7a3f": {
+    key: "\u8bba\u6587\u6295\u7a3f",
+    label: "\u8bba\u6587\u6295\u7a3f",
+    primaryYongShen: "\u7236\u6bcd",
+    secondaryReferences: ["\u5b98\u9b3c", "\u5e94\u723b", "\u4e16\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "父母代表论文、文书、录用通知；官鬼代表审稿压力、规则门槛；应爻代表期刊、编辑部、审稿方。"
+    notes:
+      "\u7236\u6bcd\u4ee3\u8868\u8bba\u6587\u3001\u6587\u4e66\u3001\u5f55\u7528\u901a\u77e5\uff1b\u5b98\u9b3c\u4ee3\u8868\u5ba1\u7a3f\u538b\u529b\u3001\u89c4\u5219\u95e8\u69db\uff1b\u5e94\u723b\u4ee3\u8868\u671f\u520a\u3001\u7f16\u8f91\u90e8\u3001\u5ba1\u7a3f\u65b9\u3002"
   },
-  文书申请: {
-    key: "文书申请",
-    label: "文书申请",
-    primaryYongShen: "父母",
-    secondaryReferences: ["官鬼", "应爻", "世爻"],
+  "\u6587\u4e66\u7533\u8bf7": {
+    key: "\u6587\u4e66\u7533\u8bf7",
+    label: "\u6587\u4e66\u7533\u8bf7",
+    primaryYongShen: "\u7236\u6bcd",
+    secondaryReferences: ["\u5b98\u9b3c", "\u5e94\u723b", "\u4e16\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "适用于申请材料、审批文件、盖章流程与制度门槛分析。"
+    notes:
+      "\u9002\u7528\u4e8e\u7533\u8bf7\u6750\u6599\u3001\u5ba1\u6279\u6587\u4ef6\u3001\u76d6\u7ae0\u6d41\u7a0b\u4e0e\u5236\u5ea6\u95e8\u69db\u5206\u6790\u3002"
   },
-  消息联络: {
-    key: "消息联络",
-    label: "消息联络",
-    primaryYongShen: "父母",
-    secondaryReferences: ["应爻", "世爻", "子孙"],
+  "\u6d88\u606f\u8054\u7edc": {
+    key: "\u6d88\u606f\u8054\u7edc",
+    label: "\u6d88\u606f\u8054\u7edc",
+    primaryYongShen: "\u7236\u6bcd",
+    secondaryReferences: ["\u5e94\u723b", "\u4e16\u723b", "\u5b50\u5b59"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "用于观察消息是否送达、是否回复、互动速度以及沟通意愿。"
+    notes:
+      "\u7528\u4e8e\u89c2\u5bdf\u6d88\u606f\u662f\u5426\u9001\u8fbe\u3001\u662f\u5426\u56de\u590d\u3001\u4e92\u52a8\u901f\u5ea6\u4ee5\u53ca\u6c9f\u901a\u610f\u613f\u3002"
   },
-  疾病健康: {
-    key: "疾病健康",
-    label: "疾病健康",
-    primaryYongShen: "官鬼",
-    secondaryReferences: ["子孙", "世爻", "父母"],
+  "\u75be\u75c5\u5065\u5eb7": {
+    key: "\u75be\u75c5\u5065\u5eb7",
+    label: "\u75be\u75c5\u5065\u5eb7",
+    primaryYongShen: "\u5b98\u9b3c",
+    secondaryReferences: ["\u5b50\u5b59", "\u4e16\u723b", "\u7236\u6bcd"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "当前版本不做医学性结论，只保留后续六亲、六神、旺衰与规则分析接口。"
+    notes:
+      "\u5f53\u524d\u7248\u672c\u4e0d\u505a\u533b\u5b66\u6027\u7ed3\u8bba\uff0c\u53ea\u4fdd\u7559\u540e\u7eed\u516d\u4eb2\u3001\u516d\u795e\u3001\u65fa\u8870\u4e0e\u89c4\u5219\u5206\u6790\u63a5\u53e3\u3002"
   },
-  官司纠纷: {
-    key: "官司纠纷",
-    label: "官司纠纷",
-    primaryYongShen: "官鬼",
-    secondaryReferences: ["父母", "应爻", "世爻"],
+  "\u5b98\u53f8\u7ea0\u7eb7": {
+    key: "\u5b98\u53f8\u7ea0\u7eb7",
+    label: "\u5b98\u53f8\u7ea0\u7eb7",
+    primaryYongShen: "\u5b98\u9b3c",
+    secondaryReferences: ["\u7236\u6bcd", "\u5e94\u723b", "\u4e16\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "适用于争议、程序推进、文书证据与制度博弈场景。"
+    notes:
+      "\u9002\u7528\u4e8e\u4e89\u8bae\u3001\u7a0b\u5e8f\u63a8\u8fdb\u3001\u6587\u4e66\u8bc1\u636e\u4e0e\u5236\u5ea6\u535a\u5f08\u573a\u666f\u3002"
   },
-  出行迁移: {
-    key: "出行迁移",
-    label: "出行迁移",
-    primaryYongShen: "世爻",
-    secondaryReferences: ["应爻", "子孙", "官鬼"],
+  "\u51fa\u884c\u8fc1\u79fb": {
+    key: "\u51fa\u884c\u8fc1\u79fb",
+    label: "\u51fa\u884c\u8fc1\u79fb",
+    primaryYongShen: "\u4e16\u723b",
+    secondaryReferences: ["\u5e94\u723b", "\u5b50\u5b59", "\u5b98\u9b3c"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "后续将结合动变、空亡、合冲与环境变化判断出行阻碍和迁移走势。"
+    notes:
+      "\u540e\u7eed\u5c06\u7ed3\u5408\u52a8\u53d8\u3001\u7a7a\u4ea1\u3001\u5408\u51b2\u4e0e\u73af\u5883\u53d8\u5316\u5224\u65ad\u51fa\u884c\u963b\u6ede\u548c\u8fc1\u79fb\u8d70\u52bf\u3002"
   },
-  寻人寻物: {
-    key: "寻人寻物",
-    label: "寻人寻物",
-    primaryYongShen: "根据对象类型细分",
-    secondaryReferences: ["应爻", "世爻", "父母"],
+  "\u5bfb\u4eba\u5bfb\u7269": {
+    key: "\u5bfb\u4eba\u5bfb\u7269",
+    label: "\u5bfb\u4eba\u5bfb\u7269",
+    primaryYongShen: "\u6839\u636e\u5bf9\u8c61\u7c7b\u578b\u7ec6\u5206",
+    secondaryReferences: ["\u5e94\u723b", "\u4e16\u723b", "\u7236\u6bcd"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "第一版先保留分类结构，后续再细化寻人、寻物、失联、方位与时间判断。"
+    notes:
+      "\u7b2c\u4e00\u7248\u5148\u4fdd\u7559\u5206\u7c7b\u7ed3\u6784\uff0c\u540e\u7eed\u518d\u7ec6\u5316\u5bfb\u4eba\u3001\u5bfb\u7269\u3001\u5931\u8054\u3001\u65b9\u4f4d\u4e0e\u65f6\u95f4\u5224\u65ad\u3002"
   },
-  合作项目: {
-    key: "合作项目",
-    label: "合作项目",
-    primaryYongShen: "应爻",
-    secondaryReferences: ["世爻", "妻财", "官鬼"],
+  "\u5408\u4f5c\u9879\u76ee": {
+    key: "\u5408\u4f5c\u9879\u76ee",
+    label: "\u5408\u4f5c\u9879\u76ee",
+    primaryYongShen: "\u5e94\u723b",
+    secondaryReferences: ["\u4e16\u723b", "\u59bb\u8d22", "\u5b98\u9b3c"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "重点看双方互动、资源匹配、利益点与项目推进节奏。"
+    notes:
+      "\u91cd\u70b9\u770b\u53cc\u65b9\u4e92\u52a8\u3001\u8d44\u6e90\u5339\u914d\u3001\u5229\u76ca\u70b9\u4e0e\u9879\u76ee\u63a8\u8fdb\u8282\u594f\u3002"
   },
-  其它杂占: {
-    key: "其它杂占",
-    label: "其它杂占",
-    primaryYongShen: "待根据问题确定",
-    secondaryReferences: ["世爻", "应爻"],
+  "\u5176\u5b83\u6742\u5360": {
+    key: "\u5176\u5b83\u6742\u5360",
+    label: "\u5176\u5b83\u6742\u5360",
+    primaryYongShen: "\u5f85\u6839\u636e\u95ee\u9898\u786e\u5b9a",
+    secondaryReferences: ["\u4e16\u723b", "\u5e94\u723b"],
     favorableRules: [],
     unfavorableRules: [],
-    notes: "用于暂时无法归类的问题，后续可加入更细的引导与取用神模板。"
+    notes:
+      "\u7528\u4e8e\u6682\u65f6\u65e0\u6cd5\u5f52\u7c7b\u7684\u95ee\u9898\uff0c\u540e\u7eed\u53ef\u52a0\u5165\u66f4\u7ec6\u7684\u5f15\u5bfc\u4e0e\u53d6\u7528\u795e\u6a21\u677f\u3002"
   }
 };

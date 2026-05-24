@@ -10,6 +10,19 @@ interface QuestionFormProps {
   onDayStemChange: (value: DayStem) => void;
 }
 
+const DAY_STEMS = [
+  "\u7532",
+  "\u4e59",
+  "\u4e19",
+  "\u4e01",
+  "\u620a",
+  "\u5df1",
+  "\u5e9a",
+  "\u8f9b",
+  "\u58ec",
+  "\u7678"
+] as const;
+
 export function QuestionForm({
   categories,
   question,
@@ -24,25 +37,29 @@ export function QuestionForm({
       <div className="section-head">
         <div>
           <p className="section-kicker">Question Context</p>
-          <h2>占事信息</h2>
+          <h2>{"\u5360\u4e8b\u4fe1\u606f"}</h2>
         </div>
-        <p className="muted-text">先记录问题、分类与起六神日干，方便后续规则分析、案例保存与复盘。</p>
+        <p className="muted-text">
+          {
+            "\u5148\u8bb0\u5f55\u95ee\u9898\u3001\u5206\u7c7b\u4e0e\u8d77\u516d\u795e\u65e5\u5e72\uff0c\u65b9\u4fbf\u540e\u7eed\u89c4\u5219\u5206\u6790\u3001\u6848\u4f8b\u4fdd\u5b58\u4e0e\u590d\u76d8\u3002"
+          }
+        </p>
       </div>
 
       <div className="form-grid">
         <div className="field-group">
-          <label htmlFor="question">占事问题</label>
+          <label htmlFor="question">{"\u5360\u4e8b\u95ee\u9898"}</label>
           <textarea
             id="question"
             rows={4}
-            placeholder="例如：这篇论文本轮投稿是否顺利进入外审？"
+            placeholder={"\u4f8b\u5982\uff1a\u8fd9\u7bc7\u8bba\u6587\u8fd9\u4e00\u8f6e\u6295\u7a3f\u662f\u5426\u80fd\u987a\u5229\u63a8\u8fdb\uff1f"}
             value={question}
             onChange={(event) => onQuestionChange(event.target.value)}
           />
         </div>
 
         <div className="field-group">
-          <label htmlFor="category">占事分类</label>
+          <label htmlFor="category">{"\u5360\u4e8b\u5206\u7c7b"}</label>
           <select
             id="category"
             value={selectedCategory}
@@ -57,9 +74,9 @@ export function QuestionForm({
         </div>
 
         <div className="field-group">
-          <label htmlFor="dayStem">起六神日干</label>
+          <label htmlFor="dayStem">{"\u8d77\u516d\u795e\u65e5\u5e72"}</label>
           <select id="dayStem" value={dayStem} onChange={(event) => onDayStemChange(event.target.value as DayStem)}>
-            {(["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"] as const).map((stem) => (
+            {DAY_STEMS.map((stem) => (
               <option key={stem} value={stem}>
                 {stem}
               </option>

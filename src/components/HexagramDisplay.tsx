@@ -35,11 +35,11 @@ export function HexagramDisplay({
       <div className="hexagram-header">
         <div>
           <div className="muted-text">{title}</div>
-          <div className="hexagram-title">{hexagram?.name ?? "未知卦"}</div>
+          <div className="hexagram-title">{hexagram?.name ?? "\u672a\u77e5\u5366"}</div>
         </div>
         <div className="tag-row">
-          <span className="tag">上卦：{hexagram?.upperTrigram ?? "-"}</span>
-          <span className="tag">下卦：{hexagram?.lowerTrigram ?? "-"}</span>
+          <span className="tag">{`\u4e0a\u5366\uff1a${hexagram?.upperTrigram ?? "-"}`}</span>
+          <span className="tag">{`\u4e0b\u5366\uff1a${hexagram?.lowerTrigram ?? "-"}`}</span>
         </div>
       </div>
 

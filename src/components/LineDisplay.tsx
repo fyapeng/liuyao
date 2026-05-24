@@ -26,7 +26,7 @@ export function LineDisplay({
       <strong>{detail.positionName}</strong>
 
       <div>
-        <div className="yao-shape" aria-label={bit === 1 ? "阳爻" : "阴爻"}>
+        <div className="yao-shape" aria-label={bit === 1 ? "\u9633\u723b" : "\u9634\u723b"}>
           {bit === 1 ? (
             <span className="segment" />
           ) : (
@@ -37,7 +37,7 @@ export function LineDisplay({
           )}
         </div>
         <div className="line-meta">
-          {detail.label} = {detail.value} = {detail.name} = {detail.yinYang}爻{detail.isMoving ? "动" : "静"}
+          {`${detail.label} = ${detail.value} = ${detail.name} = ${detail.yinYang}\u723b${detail.isMoving ? "\u52a8" : "\u9759"}`}
         </div>
         {(sixGod || najia || relative) && (
           <div className="line-chip-row">
@@ -49,9 +49,9 @@ export function LineDisplay({
       </div>
 
       <div className="line-side-tags">
-        {shi ? <span className="line-pill">世</span> : null}
-        {ying ? <span className="line-pill">应</span> : null}
-        <span className="moving-marker">{mode === "original" ? detail.marker || "—" : "—"}</span>
+        {shi ? <span className="line-pill">{"\u4e16"}</span> : null}
+        {ying ? <span className="line-pill">{"\u5e94"}</span> : null}
+        <span className="moving-marker">{mode === "original" ? detail.marker || "\u2014" : "\u2192"}</span>
       </div>
     </div>
   );

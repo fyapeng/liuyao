@@ -1,50 +1,62 @@
 import type { CoinRule, CoinSelection } from "../types/index.ts";
 
+const ZZZ = "\u5b57\u5b57\u5b57" as const;
+const ZZH = "\u5b57\u5b57\u82b1" as const;
+const ZHH = "\u5b57\u82b1\u82b1" as const;
+const HHH = "\u82b1\u82b1\u82b1" as const;
+
 export const COIN_RULES: Record<CoinSelection, CoinRule> = {
-  字字字: {
-    label: "字字字",
+  [ZZZ]: {
+    label: ZZZ,
     value: 6,
-    name: "老阴",
-    yinYang: "阴",
+    name: "\u8001\u9634",
+    yinYang: "\u9634",
     isMoving: true,
-    description: "字字字 = 6 = 老阴 = 阴爻动，变阳",
-    marker: "×",
+    description: "\u5b57\u5b57\u5b57 = 6 = \u8001\u9634 = \u9634\u723b\u52a8\uff0c\u53d8\u9633",
+    marker: "\u00d7",
     originalLine: 0,
     changedLine: 1
   },
-  字字花: {
-    label: "字字花",
+  [ZZH]: {
+    label: ZZH,
     value: 7,
-    name: "少阳",
-    yinYang: "阳",
+    name: "\u5c11\u9633",
+    yinYang: "\u9633",
     isMoving: false,
-    description: "字字花 = 7 = 少阳 = 阳爻静",
+    description: "\u5b57\u5b57\u82b1 = 7 = \u5c11\u9633 = \u9633\u723b\u9759",
     marker: "",
     originalLine: 1,
     changedLine: 1
   },
-  字花花: {
-    label: "字花花",
+  [ZHH]: {
+    label: ZHH,
     value: 8,
-    name: "少阴",
-    yinYang: "阴",
+    name: "\u5c11\u9634",
+    yinYang: "\u9634",
     isMoving: false,
-    description: "字花花 = 8 = 少阴 = 阴爻静",
+    description: "\u5b57\u82b1\u82b1 = 8 = \u5c11\u9634 = \u9634\u723b\u9759",
     marker: "",
     originalLine: 0,
     changedLine: 0
   },
-  花花花: {
-    label: "花花花",
+  [HHH]: {
+    label: HHH,
     value: 9,
-    name: "老阳",
-    yinYang: "阳",
+    name: "\u8001\u9633",
+    yinYang: "\u9633",
     isMoving: true,
-    description: "花花花 = 9 = 老阳 = 阳爻动，变阴",
-    marker: "○",
+    description: "\u82b1\u82b1\u82b1 = 9 = \u8001\u9633 = \u9633\u723b\u52a8\uff0c\u53d8\u9634",
+    marker: "\u25cb",
     originalLine: 1,
     changedLine: 0
   }
 };
 
-export const POSITION_NAMES = ["初爻", "二爻", "三爻", "四爻", "五爻", "上爻"] as const;
+export const POSITION_NAMES = [
+  "\u521d\u723b",
+  "\u4e8c\u723b",
+  "\u4e09\u723b",
+  "\u56db\u723b",
+  "\u4e94\u723b",
+  "\u4e0a\u723b"
+] as const;

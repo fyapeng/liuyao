@@ -4,7 +4,7 @@ export const RULE_TEMPLATES: CategoryRuleTemplate[] = [
   {
     id: "placeholder-moving-lines",
     title: "动爻观察",
-    description: "后续将根据动爻位置、世应关系和用神状态输出规则命中。"
+    description: "后续将根据动爻位置、世应关系和用神状态输出更细的规则命中。"
   },
   {
     id: "placeholder-strength",

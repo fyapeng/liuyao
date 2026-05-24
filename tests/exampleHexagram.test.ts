@@ -2,10 +2,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildHexagramResult } from "../src/lib/getHexagramName.ts";
 
-test("示例卦应得到雷天大壮，三爻动，变卦雷泽归妹", () => {
-  const result = buildHexagramResult(["字字花", "字字花", "花花花", "字字花", "字花花", "字花花"]);
+test("example casting yields dazhuang to guimei", () => {
+  const result = buildHexagramResult([
+    "\u5b57\u5b57\u82b1",
+    "\u5b57\u5b57\u82b1",
+    "\u82b1\u82b1\u82b1",
+    "\u5b57\u5b57\u82b1",
+    "\u5b57\u82b1\u82b1",
+    "\u5b57\u82b1\u82b1"
+  ]);
 
-  assert.equal(result.originalHexagram?.name, "雷天大壮");
+  assert.equal(result.originalHexagram?.name, "\u96f7\u5929\u5927\u58ee");
   assert.deepEqual(result.movingLinePositions, [3]);
-  assert.equal(result.changedHexagram?.name, "雷泽归妹");
+  assert.equal(result.changedHexagram?.name, "\u96f7\u6cfd\u5f52\u59b9");
 });

@@ -1,7 +1,7 @@
 export interface ShiYingPattern {
   hexagramKey: string;
   palace: string;
-  palaceElement: "木" | "火" | "土" | "金" | "水";
+  palaceElement: "\u6728" | "\u706b" | "\u571f" | "\u91d1" | "\u6c34";
   palaceOrder: number;
   shi: 1 | 2 | 3 | 4 | 5 | 6;
   ying: 1 | 2 | 3 | 4 | 5 | 6;
@@ -11,36 +11,36 @@ const SHI_SEQUENCE = [6, 1, 2, 3, 4, 5, 4, 3] as const;
 const YING_SEQUENCE = [3, 4, 5, 6, 1, 2, 1, 6] as const;
 
 const PALACE_DEFINITIONS = {
-  乾: {
-    element: "金",
+  "\u4e7e": {
+    element: "\u91d1",
     keys: ["qian", "gou", "dun", "pi", "guan", "bo", "jin", "dayou"]
   },
-  兑: {
-    element: "金",
+  "\u5151": {
+    element: "\u91d1",
     keys: ["dui", "kun2", "cui", "xian", "jian", "qian2", "xiaoguo", "guimei"]
   },
-  离: {
-    element: "火",
+  "\u79bb": {
+    element: "\u706b",
     keys: ["li", "lv2", "ding", "weiji", "meng", "huan", "song", "tongren"]
   },
-  震: {
-    element: "木",
+  "\u9707": {
+    element: "\u6728",
     keys: ["zhen", "yu", "jie", "heng", "sheng", "jing", "daguo", "sui"]
   },
-  巽: {
-    element: "木",
+  "\u5deb": {
+    element: "\u6728",
     keys: ["xun", "xiaoxu", "jiaren", "yi2", "wuwang", "shike", "yi", "gu"]
   },
-  坎: {
-    element: "水",
+  "\u574e": {
+    element: "\u6c34",
     keys: ["kan", "jie2", "zhun", "jiji", "ge", "feng", "mingyi", "shi"]
   },
-  艮: {
-    element: "土",
+  "\u826e": {
+    element: "\u571f",
     keys: ["gen", "bi2", "daxu", "sun", "kui", "lv", "zhongfu", "jian2"]
   },
-  坤: {
-    element: "土",
+  "\u5764": {
+    element: "\u571f",
     keys: ["kun", "fu", "lin", "tai", "dazhuang", "guai", "xu", "bi"]
   }
 } as const;

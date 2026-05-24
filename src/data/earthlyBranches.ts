@@ -1,22 +1,22 @@
 export interface EarthlyBranch {
   key: string;
   label: string;
-  wuxing: "木" | "火" | "土" | "金" | "水";
+  wuxing: "\u6728" | "\u706b" | "\u571f" | "\u91d1" | "\u6c34";
 }
 
 export const EARTHLY_BRANCHES: EarthlyBranch[] = [
-  { key: "zi", label: "子", wuxing: "水" },
-  { key: "chou", label: "丑", wuxing: "土" },
-  { key: "yin", label: "寅", wuxing: "木" },
-  { key: "mao", label: "卯", wuxing: "木" },
-  { key: "chen", label: "辰", wuxing: "土" },
-  { key: "si", label: "巳", wuxing: "火" },
-  { key: "wu", label: "午", wuxing: "火" },
-  { key: "wei", label: "未", wuxing: "土" },
-  { key: "shen", label: "申", wuxing: "金" },
-  { key: "you", label: "酉", wuxing: "金" },
-  { key: "xu", label: "戌", wuxing: "土" },
-  { key: "hai", label: "亥", wuxing: "水" }
+  { key: "zi", label: "\u5b50", wuxing: "\u6c34" },
+  { key: "chou", label: "\u4e11", wuxing: "\u571f" },
+  { key: "yin", label: "\u5bc5", wuxing: "\u6728" },
+  { key: "mao", label: "\u536f", wuxing: "\u6728" },
+  { key: "chen", label: "\u8fb0", wuxing: "\u571f" },
+  { key: "si", label: "\u5df3", wuxing: "\u706b" },
+  { key: "wu", label: "\u5348", wuxing: "\u706b" },
+  { key: "wei", label: "\u672a", wuxing: "\u571f" },
+  { key: "shen", label: "\u7533", wuxing: "\u91d1" },
+  { key: "you", label: "\u9149", wuxing: "\u91d1" },
+  { key: "xu", label: "\u620c", wuxing: "\u571f" },
+  { key: "hai", label: "\u4ea5", wuxing: "\u6c34" }
 ];
 
 export const EARTHLY_BRANCH_WUXING = Object.fromEntries(
