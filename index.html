@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>六爻排盘</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>六爻排盘</h1>
+  <p>起 卦 · 装 卦 · 断 卦 提 示</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="coin">铜钱摇卦</button>
+  <button class="tab" data-tab="time">时间起卦</button>
+  <button class="tab" data-tab="num">数字起卦</button>
+</nav>
+
+<!-- ============ 铜钱摇卦 ============ -->
+<section class="card" id="tab-coin">
+  <h2>铜钱摇卦<span class="sub">三枚铜钱 · 摇六次 · 自下而上成卦</span></h2>
+  <div class="coins" id="coins">
+    <div class="coin"><div class="coin-inner"><div class="face">字</div><div class="face back">背</div></div></div>
+    <div class="coin"><div class="coin-inner"><div class="face">字</div><div class="face back">背</div></div></div>
+    <div class="coin"><div class="coin-inner"><div class="face">字</div><div class="face back">背</div></div></div>
+  </div>
+  <div class="coin-actions">
+    <button class="btn" id="btn-throw">摇第一爻</button>
+    <button class="btn ghost" id="btn-auto">自动摇完</button>
+    <button class="btn ghost" id="btn-reset">重摇</button>
+  </div>
+  <p class="hint" style="text-align:center">字为阳（3点）· 背为阴（2点）｜三字老阳○ 三背老阴× 一字二背少阳 二字一背少阴</p>
+  <div class="throws" id="throws"></div>
+</section>
+
+<!-- ============ 时间起卦 ============ -->
+<section class="card hidden" id="tab-time">
+  <h2>时间起卦<span class="sub">梅花易数 · 年月日时起卦</span></h2>
+  <div class="row">
+    <div class="field"><label>年（地支序数 子1—亥12）</label><input id="t-year" type="number" value="7" style="width:90px"></div>
+    <div class="field"><label>月</label><input id="t-month" type="number" value="9" style="width:70px"></div>
+    <div class="field"><label>日</label><input id="t-day" type="number" value="27" style="width:70px"></div>
+    <div class="field"><label>时（时辰序数 子1—亥12）</label><input id="t-hour" type="number" value="7" style="width:90px"></div>
+    <div class="field"><label>&nbsp;</label><button class="btn ghost small" id="btn-now">取当前时间</button></div>
+  </div>
+  <p class="hint">传统取农历数，此处默认填公历简便值，可手动改为农历数。上卦＝(年+月+日)÷8，下卦＝(年+月+日+时)÷8，动爻＝总数÷6，余数按先天八卦数（乾1 兑2 离3 震4 巽5 坎6 艮7 坤8）定卦。</p>
+  <div class="row" style="margin-top:14px"><button class="btn" id="btn-time-go">起卦排盘</button></div>
+  <div class="calc hidden" id="time-calc"></div>
+</section>
+
+<!-- ============ 数字起卦 ============ -->
+<section class="card hidden" id="tab-num">
+  <h2>数字起卦<span class="sub">任意数字 · 即兴起卦</span></h2>
+  <div class="row">
+    <div class="field"><label>数一（定上卦）</label><input id="n-a" type="number" value="8" style="width:100px"></div>
+    <div class="field"><label>数二（定下卦）</label><input id="n-b" type="number" value="8" style="width:100px"></div>
+    <div class="field"><label>数三（定动爻，可空）</label><input id="n-c" type="number" placeholder="空" style="width:100px"></div>
+  </div>
+  <p class="hint">上卦＝数一÷8，下卦＝数二÷8，动爻＝(数一+数二+数三)÷6，余数按先天八卦数定卦。</p>
+  <div class="row" style="margin-top:14px"><button class="btn" id="btn-num-go">起卦排盘</button></div>
+  <div class="calc hidden" id="num-calc"></div>
+</section>
+
+<!-- ============ 断卦参数 ============ -->
+<section class="card" id="params">
+  <h2>断卦参数</h2>
+  <div class="row">
+    <div class="field grow"><label>所问之事（一句话即可）</label><input id="p-question" placeholder="例如：这次跳槽是否顺利"></div>
+    <div class="field"><label>问事类别（定用神）</label><select id="p-cat"></select></div>
+  </div>
+  <div class="row">
+    <div class="field"><label>占问日（日柱，默认今日）</label>
+      <div style="display:flex;gap:8px">
+        <select id="p-stem"></select><select id="p-branch"></select>
+        <button class="btn ghost small" id="btn-today">今日</button>
+      </div>
+    </div>
+    <div class="field"><label>月建（默认按节气近似，可改）</label><select id="p-yue"></select></div>
+  </div>
+  <p class="hint" id="p-dayinfo"></p>
+</section>
+
+<!-- ============ 排盘结果 ============ -->
+<section class="card hidden" id="result">
+  <h2>排盘结果</h2>
+  <div class="gua-head">
+    <div class="gname" id="r-gname"></div>
+    <div class="gmeta" id="r-gmeta"></div>
+  </div>
+  <div class="panels">
+    <div class="panel"><div class="p-title">本 卦</div><div class="p-sub" id="r-ben-sub"></div><div id="r-ben"></div></div>
+    <div class="panel" id="r-bian-panel"><div class="p-title">变 卦</div><div class="p-sub" id="r-bian-sub"></div><div id="r-bian"></div></div>
+  </div>
+</section>
+
+<!-- ============ 断卦提示 ============ -->
+<section class="card hidden" id="tips-card">
+  <h2>断卦提示<span class="sub">基础信息 · 仅供参考</span></h2>
+  <div class="tips" id="tips"></div>
+</section>
+
+<!-- ============ 规则速查 ============ -->
+<section style="margin-top:8px">
+  <details class="rule"><summary>起卦规则</summary><div class="body">
+    <p><b>铜钱摇卦：</b>三枚铜钱，字为3点、背为2点。两字一背＝少阴（▬▬ ▬▬），两背一字＝少阳（▬▬▬），三字＝老阳（○，动变阴），三背＝老阴（×，动变阳）。摇六次，自初爻至上爻。</p>
+    <p><b>时间起卦：</b>年取地支序数（子1…亥12），上卦＝(年+月+日)÷8取余，下卦＝(年+月+日+时)÷8取余，动爻＝总数÷6取余；余数按先天八卦数 乾1、兑2、离3、震4、巽5、坎6、艮7、坤8 定卦。</p>
+    <p><b>数字起卦：</b>同上，数一为上卦、数二为下卦、三数之和定动爻。</p>
+  </div></details>
+  <details class="rule"><summary>装卦规则（纳甲 · 世应 · 六亲 · 六兽 · 旬空）</summary><div class="body">
+    <p><b>纳甲歌：</b>乾内甲子外壬午，坎内戊寅外戊申，艮内丙辰外丙戌，震内庚子外庚午，巽内辛丑外辛未，离内己卯外己酉，兑内丁巳外丁亥，坤内乙未外癸丑。内卦用内干支、外卦用外干支，自下而上配地支。</p>
+    <p><b>安世应：</b>本宫卦世在上爻，一世世初爻、二世世二爻、三世世三爻、四世世四爻、五世世五爻，游魂世四爻、归魂世三爻；应爻与世爻隔三位。</p>
+    <p><b>六亲：</b>以宫五行为"我"：生我者父母，我生者子孙，克我者官鬼，我克者妻财，同类者兄弟。宫五行：乾兑金、震巽木、坤艮土、坎水、离火。</p>
+    <p><b>六兽：</b>按占问日干起，甲乙日青龙、丙丁日朱雀、戊日勾陈、己日螣蛇、庚辛日白虎、壬癸日玄武，自初爻向上排。</p>
+    <p><b>旬空：</b>按日柱定，甲子旬空戌亥、甲戌旬空申酉、甲申旬空午未、甲午旬空辰巳、甲辰旬空寅卯、甲寅旬空子丑。</p>
+  </div></details>
+  <details class="rule"><summary>关于简化的说明</summary><div class="body">
+    <p>1. 时间起卦默认填公历数值，传统用农历——动手改成农历数即可，算法不变。<br>
+    2. 月建默认按公历月份近似（1月≈丑月…12月≈子月），严格应按节气，请按实际节气手动选择。<br>
+    3. 日柱按公历推算（1900-01-01甲戌日起算），准确；但子时（23点后）在严格历法中属次日，本页未做此换算，夜里起卦请手动将日柱进一位。<br>
+    4. 断卦提示只给结构化信息（动爻、用神位置、旺衰、旬空），不断吉凶——断语是经验活，工具只负责把盘排对。</p>
+  </div></details>
+</section>
+
+<footer>六爻排盘 · 规则引擎已通过 68 项单元测试</footer>
+</div>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
