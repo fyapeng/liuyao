@@ -76,7 +76,9 @@ header p{color:var(--muted);font-size:13px;letter-spacing:3px}
 .gua-head .gname{font-family:var(--serif);font-size:30px;letter-spacing:8px;margin-bottom:4px}
 .gua-head .gmeta{color:var(--muted);font-size:13px;letter-spacing:2px}
 .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:640px){.panels{grid-template-columns:1fr}}
+@media(max-width:640px){.panels{grid-template-columns:1fr}
+.throws{gap:6px}.throw{padding:8px 2px;min-height:78px}.throw .yao{width:100%;max-width:74px}
+.card{padding:20px 16px}}
 .panel{border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .panel .p-title{background:var(--ink);color:#f6f3ec;text-align:center;padding:8px;
   font-family:var(--serif);letter-spacing:6px;font-size:15px}
