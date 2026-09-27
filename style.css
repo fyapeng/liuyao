@@ -11,6 +11,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
 header{text-align:center;padding:44px 0 8px}
 header h1{font-family:var(--serif);font-size:34px;letter-spacing:14px;font-weight:600;margin-bottom:6px}
 header p{color:var(--muted);font-size:13px;letter-spacing:3px}
+/* clock */
+.clock{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;text-align:center;
+  color:var(--muted);font-size:13px;letter-spacing:1px;margin:6px 0 2px}
+.clock #c-solar{color:var(--ink);font-weight:600}
+@media(max-width:640px){.clock{font-size:12px;gap:8px}}
 /* tabs */
 .tabs{display:flex;gap:8px;justify-content:center;margin:26px 0 20px;flex-wrap:wrap}
 .tab{border:1px solid var(--line);background:var(--card);color:var(--muted);

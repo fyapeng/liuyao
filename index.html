@@ -14,6 +14,10 @@
   <p>起 卦 · 装 卦 · 断 卦 提 示</p>
 </header>
 
+<div class="clock" id="clock" title="四柱中年柱以立春为界、月柱以节气为界">
+  <span id="c-solar"></span><span id="c-lunar"></span><span id="c-gz"></span>
+</div>
+
 <nav class="tabs">
   <button class="tab active" data-tab="coin">铜钱摇卦</button>
   <button class="tab" data-tab="time">时间起卦</button>
@@ -41,13 +45,14 @@
 <section class="card hidden" id="tab-time">
   <h2>时间起卦<span class="sub">梅花易数 · 年月日时起卦</span></h2>
   <div class="row">
-    <div class="field"><label>年（地支序数 子1—亥12）</label><input id="t-year" type="number" value="7" style="width:90px"></div>
-    <div class="field"><label>月</label><input id="t-month" type="number" value="9" style="width:70px"></div>
-    <div class="field"><label>日</label><input id="t-day" type="number" value="27" style="width:70px"></div>
-    <div class="field"><label>时（时辰序数 子1—亥12）</label><input id="t-hour" type="number" value="7" style="width:90px"></div>
+    <div class="field"><label>年（农历年份）</label><input id="t-year" type="number" value="2026" style="width:90px"></div>
+    <div class="field"><label>农历月</label><input id="t-month" type="number" value="8" style="width:70px"></div>
+    <div class="field"><label>农历日</label><input id="t-day" type="number" value="17" style="width:70px"></div>
+    <div class="field"><label>时辰</label><select id="t-hour" style="width:140px;font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:#fff"></select></div>
     <div class="field"><label>&nbsp;</label><button class="btn ghost small" id="btn-now">取当前时间</button></div>
   </div>
-  <p class="hint">传统取农历数，此处默认填公历简便值，可手动改为农历数。上卦＝(年+月+日)÷8，下卦＝(年+月+日+时)÷8，动爻＝总数÷6，余数按先天八卦数（乾1 兑2 离3 震4 巽5 坎6 艮7 坤8）定卦。</p>
+  <p class="hint" id="time-info"></p>
+  <p class="hint">梅花易数以农历年月日时取数：年数取当年地支序数（子1—亥12），月取农历月份，日取农历日期，时取时辰地支序数。上卦＝(年+月+日)÷8，下卦＝(年+月+日+时)÷8，动爻＝总数÷6，余数按先天八卦数（乾1 兑2 离3 震4 巽5 坎6 艮7 坤8）定卦。</p>
   <div class="row" style="margin-top:14px"><button class="btn" id="btn-time-go">起卦排盘</button></div>
   <div class="calc hidden" id="time-calc"></div>
 </section>
@@ -127,6 +132,7 @@
 
 <footer>六爻排盘 · 规则引擎已通过 68 项单元测试</footer>
 </div>
+<script src="lunar.js"></script>
 <script src="engine.js"></script>
 <script src="app.js"></script>
 </body>

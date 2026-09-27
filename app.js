@@ -109,20 +109,53 @@ function finishCoin() {
 }
 renderThrows();
 
-/* ---------- 时间 / 数字起卦 ---------- */
-function setNow() {
-  const n = new Date();
-  const yIdx = (((n.getFullYear() - 4) % 12) + 12) % 12;
-  $('t-year').value = yIdx + 1;
-  $('t-month').value = n.getMonth() + 1;
-  $('t-day').value = n.getDate();
-  const h = n.getHours();
-  $('t-hour').value = (h >= 23 || h < 1 ? 0 : Math.floor((h + 1) / 2)) + 1;
+/* ---------- 顶部实时时钟（公历 + 农历 + 四柱） ---------- */
+const pad2 = n => String(n).padStart(2, '0');
+function tickClock() {
+  const n = new Date(), l = Solar.fromDate(n).getLunar();
+  $('c-solar').textContent =
+    `${n.getFullYear()}年${n.getMonth()+1}月${n.getDate()}日 星期${'日一二三四五六'[n.getDay()]} ${pad2(n.getHours())}:${pad2(n.getMinutes())}:${pad2(n.getSeconds())}`;
+  $('c-lunar').textContent = `农历${l.getYearGan()}${l.getYearZhi()}年${l.getMonthInChinese()}月${l.getDayInChinese()}`;
+  $('c-gz').textContent =
+    `${l.getYearGanExact()}${l.getYearZhiExact()}年 ${l.getMonthGanExact()}${l.getMonthZhiExact()}月 ${l.getDayGanExact()}${l.getDayZhiExact()}日 ${l.getTimeGan()}${l.getTimeZhi()}时`;
 }
+tickClock(); setInterval(tickClock, 1000);
+
+/* ---------- 时间 / 数字起卦 ---------- */
+const SHICHEN = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const SHICHEN_RANGE = ['23–1点','1–3点','3–5点','5–7点','7–9点','9–11点','11–13点','13–15点','15–17点','17–19点','19–21点','21–23点'];
+SHICHEN.forEach((z, i) => {
+  const o = document.createElement('option');
+  o.value = i + 1; o.textContent = `${z}时（${SHICHEN_RANGE[i]}）`;
+  $('t-hour').appendChild(o);
+});
+const hourBranchNum = h => (Math.floor((h + 1) / 2) % 12) + 1; // 小时 → 时辰序数 子1..亥12
+const lunarYearGanzhi = ly => // 农历年份 → 干支
+  LY.STEMS[(((ly - 4) % 10) + 10) % 10] + LY.BRANCHES[(((ly - 4) % 12) + 12) % 12];
+const lunarYearNum = ly => LY.BRANCHES.indexOf(lunarYearGanzhi(ly)[1]) + 1; // 年数取地支序数
+function updateTimeInfo() {
+  const ly = +$('t-year').value, mo = +$('t-month').value, d = +$('t-day').value, h = +$('t-hour').value;
+  if (!ly || !mo || !d || !h) { $('time-info').textContent = ''; return; }
+  const gz = lunarYearGanzhi(ly), zhi = gz[1];
+  $('time-info').textContent =
+    `取数：${ly}年（农历${gz}年，年数取${zhi}=${lunarYearNum(ly)}）· 农历${mo}月${d}日 · ${SHICHEN[h-1]}时（=${h}）`;
+}
+function setNow() {
+  const l = Solar.fromDate(new Date()).getLunar();
+  $('t-year').value = l.getYear();
+  $('t-month').value = l.getMonth();
+  $('t-day').value = l.getDay();
+  $('t-hour').value = hourBranchNum(new Date().getHours());
+  updateTimeInfo();
+}
+['t-year','t-month','t-day','t-hour'].forEach(id => {
+  $(id).addEventListener('input', updateTimeInfo);
+  $(id).addEventListener('change', updateTimeInfo);
+});
 setNow();
 $('btn-now').onclick = setNow;
 $('btn-time-go').onclick = () => {
-  const g = LY.timeGua(+$('t-year').value, +$('t-month').value, +$('t-day').value, +$('t-hour').value);
+  const g = LY.timeGua(lunarYearNum(+$('t-year').value), +$('t-month').value, +$('t-day').value, +$('t-hour').value);
   const el = $('time-calc'); el.classList.remove('hidden'); el.textContent = g.calc;
   renderAll(g.bits, g.moving, '时间起卦');
 };
