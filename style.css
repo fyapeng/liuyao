@@ -82,6 +82,7 @@ header p{color:var(--muted);font-size:13px;letter-spacing:3px}
 .gua-head .gmeta{color:var(--muted);font-size:13px;letter-spacing:2px}
 .panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){.panels{grid-template-columns:1fr}
+.panel{overflow-x:auto}
 .throws{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .throw{padding:10px 4px;min-height:78px;min-width:0}
 .throw .yao{width:100%;max-width:74px}
