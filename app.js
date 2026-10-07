@@ -4,6 +4,9 @@ const $ = id => document.getElementById(id);
 const POS_NAMES = ['初爻','二爻','三爻','四爻','五爻','上爻'];
 const ORD = ['一','二','三','四','五','上'];
 
+/* 最近一次排盘结果，供"复制卦象"按钮序列化 */
+let lastReading = null;
+
 /* ---------- 页签 ---------- */
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
   document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
@@ -225,6 +228,7 @@ function renderAll(bits, moving, method) {
   $('result').classList.remove('hidden');
   renderTips(ben, bian, moving, p);
   $('tips-card').classList.remove('hidden');
+  lastReading = {ben, bian, moving, p, method, stem, branch};
   $('result').scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
@@ -272,3 +276,69 @@ function renderTips(ben, bian, moving, p) {
 
   $('tips').innerHTML = T.map(t => `<div class="tip"><h3>${t.h}</h3>${t.b}</div>`).join('');
 }
+
+/* ---------- 复制卦象文本（粘贴到任意 AI 输入框解读） ---------- */
+/* r: {ben, bian, moving, p, method, stem, branch}；纯函数，无 DOM 依赖（除 LY/POS_NAMES） */
+function buildCopyText(r) {
+  const {ben, bian, moving, p, method, stem, branch} = r;
+  const yueEl = LY.BRANCH_ELEMENT[p.yue];
+  const L = [];
+  L.push('【六爻占问 · 请按传统六爻框架解读】');
+  L.push(`问事：${p.question || '（未填写）'}`);
+  L.push(`类别：${p.cat}｜起卦方式：${method}`);
+  L.push(`占问日：日柱${stem}${branch}（旬空${ben.xunkong.join('')}）· 月建${p.yue}（${yueEl}）`);
+  L.push('');
+  L.push(`本卦：${ben.hex.palace}${ben.hex.name}（${ben.hex.palaceEl}行），世在${POS_NAMES[ben.hex.shi-1]}`);
+  ben.rows.forEach(row => {
+    const mv = moving.includes(row.line) ? (row.yang ? ' ○动' : ' ×动') : '';
+    const sy = row.shi ? '【世】' : row.ying ? '【应】' : '';
+    const wx = LY.wangxiang(yueEl, LY.BRANCH_ELEMENT[row.branch]);
+    L.push(`${POS_NAMES[row.line-1]}：${row.beast}${row.ganzhi}${row.qin}${row.kong ? '（旬空）' : ''}${sy}${row.yang ? '阳' : '阴'}${mv} · 月建${wx}`);
+  });
+  if (bian && moving.length) {
+    L.push('');
+    L.push(`变卦：${bian.hex.name}（${bian.hex.palace}）`);
+    moving.forEach(m => {
+      const r0 = ben.rows[m-1], r1 = bian.rows[m-1];
+      L.push(`${POS_NAMES[m-1]}变：${r0.ganzhi}${r0.qin} → ${r1.ganzhi}${r1.qin}`);
+    });
+  } else {
+    L.push('（六爻安静，无动爻）');
+  }
+  const cfg = LY.YONGSHEN[p.cat];
+  const ys = ben.rows.filter(row => isYongShen(row, p.cat, cfg));
+  L.push('');
+  L.push(`用神（${p.cat}）：${ys.length ? ys.map(row => `${POS_NAMES[row.line-1]}${row.ganzhi}${row.qin}${row.kong ? '旬空' : ''}`).join('、') : '本卦无此六亲（伏藏）'}`);
+  L.push(`断卦要点：${cfg.note}`);
+  L.push('');
+  L.push('请按传统六爻框架分析：1）取用神，断旺衰（结合日月生克）；2）动爻、变爻的生克冲合；3）世应关系；4）旬空的影响。先说结论（吉/凶、应期、建议），再分条说明理由。用简体中文回答。');
+  return L.join('\n');
+}
+
+/* PC 与移动端通用：优先 navigator.clipboard，失败降级为隐藏 textarea + execCommand */
+async function copyText(t) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try { await navigator.clipboard.writeText(t); return true; }
+    catch (e) { /* 降级到 execCommand */ }
+  }
+  const ta = document.createElement('textarea');
+  ta.value = t;
+  ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+  document.body.appendChild(ta);
+  ta.select();
+  try { ta.setSelectionRange(0, ta.value.length); } catch (e) {}
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  return ok;
+}
+
+$('btn-copy').onclick = async () => {
+  if (!lastReading) return;
+  const btn = $('btn-copy');
+  const orig = btn.textContent;
+  const ok = await copyText(buildCopyText(lastReading));
+  btn.textContent = ok ? '已复制 ✓ 去 AI 里粘贴吧' : '复制失败，请手动复制';
+  setTimeout(() => { btn.textContent = orig; }, 2200);
+};
