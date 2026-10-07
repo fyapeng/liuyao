@@ -36,11 +36,14 @@ function updateDayInfo() {
     `日柱 ${$('p-stem').value}${$('p-branch').value} · 旬空 ${LY.xunkong(idx).join('、')} · 日干${$('p-stem').value}起六兽`;
 }
 function setTodayStemBranch() {
-  const n = new Date(), dp = LY.dayPillar(n.getFullYear(), n.getMonth()+1, n.getDate());
+  const n = new Date();
+  if (n.getHours() >= 23) n.setDate(n.getDate() + 1); // 子时（23点后）按次日推算日柱
+  const dp = LY.dayPillar(n.getFullYear(), n.getMonth()+1, n.getDate());
   $('p-stem').value = dp.stem; $('p-branch').value = dp.branch; updateDayInfo();
 }
 setTodayStemBranch();
-$('p-yue').value = ['丑','寅','卯','辰','巳','午','未','申','酉','戌','亥','子'][new Date().getMonth()];
+/* 月建按节气严格推算（立春为寅月之始），不再用公历月份近似 */
+$('p-yue').value = Solar.fromDate(new Date()).getLunar().getMonthZhiExact();
 $('p-stem').onchange = $('p-branch').onchange = updateDayInfo;
 $('btn-today').onclick = setTodayStemBranch;
 
