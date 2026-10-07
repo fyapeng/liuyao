@@ -108,7 +108,9 @@ $('btn-reset').onclick = () => {
 function finishCoin() {
   const bits = coinState.throws.map(t => t.yang ? 1 : 0);
   const moving = coinState.throws.map((t,i) => t.moving ? i+1 : null).filter(Boolean);
-  renderAll(bits, moving, '铜钱摇卦');
+  const detail = '铜钱摇卦（字=3点，背=2点；三字=老阳○动变阴，三背=老阴×动变阳，两字一背=少阴，两背一字=少阳）：' +
+    coinState.throws.map((t,i) => `${POS_NAMES[i]}${t.coins.map(c=>c?'字':'背').join('')}（${t.label}）`).join('、');
+  renderAll(bits, moving, '铜钱摇卦', detail);
 }
 renderThrows();
 
@@ -160,14 +162,14 @@ $('btn-now').onclick = setNow;
 $('btn-time-go').onclick = () => {
   const g = LY.timeGua(lunarYearNum(+$('t-year').value), +$('t-month').value, +$('t-day').value, +$('t-hour').value);
   const el = $('time-calc'); el.classList.remove('hidden'); el.textContent = g.calc;
-  renderAll(g.bits, g.moving, '时间起卦');
+  renderAll(g.bits, g.moving, '时间起卦', `时间起卦取数：${g.calc}`);
 };
 $('btn-num-go').onclick = () => {
   const a = +$('n-a').value || 0, b = +$('n-b').value || 0;
   const c = $('n-c').value === '' ? 0 : (+$('n-c').value || 0);
   const g = LY.numGua(a, b, c);
   const el = $('num-calc'); el.classList.remove('hidden'); el.textContent = g.calc;
-  renderAll(g.bits, g.moving, '数字起卦');
+  renderAll(g.bits, g.moving, '数字起卦', `数字起卦取数（数一=${a}、数二=${b}、数三=${$('n-c').value === '' ? '空' : c}）：${g.calc}`);
 };
 
 /* ---------- 排盘渲染 ---------- */
@@ -204,7 +206,7 @@ function bianTable(rows) {
   return h + '</tbody></table>';
 }
 
-function renderAll(bits, moving, method) {
+function renderAll(bits, moving, method, qigua) {
   const p = {dayIdx: selectedDayIdx(), yue: $('p-yue').value,
              cat: $('p-cat').value, question: $('p-question').value.trim()};
   const stem = $('p-stem').value, branch = $('p-branch').value;
@@ -228,7 +230,7 @@ function renderAll(bits, moving, method) {
   $('result').classList.remove('hidden');
   renderTips(ben, bian, moving, p);
   $('tips-card').classList.remove('hidden');
-  lastReading = {ben, bian, moving, p, method, stem, branch};
+  lastReading = {ben, bian, moving, p, method, stem, branch, qigua: qigua || ''};
   $('result').scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
@@ -280,13 +282,16 @@ function renderTips(ben, bian, moving, p) {
 /* ---------- 复制卦象文本（粘贴到任意 AI 输入框解读） ---------- */
 /* r: {ben, bian, moving, p, method, stem, branch}；纯函数，无 DOM 依赖（除 LY/POS_NAMES） */
 function buildCopyText(r) {
-  const {ben, bian, moving, p, method, stem, branch} = r;
+  const {ben, bian, moving, p, method, stem, branch, qigua} = r;
   const yueEl = LY.BRANCH_ELEMENT[p.yue];
   const L = [];
   L.push('【六爻占问 · 请按传统六爻框架解读】');
   L.push(`问事：${p.question || '（未填写）'}`);
   L.push(`类别：${p.cat}｜起卦方式：${method}`);
   L.push(`占问日：日柱${stem}${branch}（旬空${ben.xunkong.join('')}）· 月建${p.yue}（${yueEl}）`);
+  L.push('');
+  L.push(`起卦过程：${qigua || '（无记录）'}`);
+  L.push('【验算要求】请先根据上面的起卦过程独立推导本卦、动爻、变卦，确认与下列排盘一致；若不一致，请先指出分歧点并暂停解读，不要自行改动卦象。纳甲、世应、六亲、六兽以本工具排盘为准，无需重算。');
   L.push('');
   L.push(`本卦：${ben.hex.palace}${ben.hex.name}（${ben.hex.palaceEl}行），世在${POS_NAMES[ben.hex.shi-1]}`);
   ben.rows.forEach(row => {
