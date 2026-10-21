@@ -71,6 +71,20 @@ header p{color:var(--muted);font-size:13px;letter-spacing:3px}
 .throw .t-coins{font-size:13px;color:var(--ink)}
 .throw .t-label{font-size:12px}
 .throw .t-line{margin:2px auto}
+/* manual entry */
+.m-rows{display:grid;gap:10px;margin-top:14px}
+.m-row{display:flex;align-items:center;gap:12px;border:1px dashed var(--line);border-radius:10px;
+  padding:10px 12px;flex-wrap:wrap;background:transparent}
+.m-row.done{border-style:solid;background:#fff}
+.m-pos{font-size:13px;color:var(--muted);width:38px;letter-spacing:1px}
+.m-coins{display:flex;gap:8px}
+.m-coin{width:44px;height:44px;border-radius:50%;border:2px solid #7c5f26;background:#f4efe3;
+  color:#5e451a;font-family:var(--serif);font-size:17px;cursor:pointer;transition:all .15s;padding:0}
+.m-coin:hover{border-color:var(--accent)}
+.m-coin.set{background:radial-gradient(circle at 35% 30%,#eed48c,#c69a45 55%,#93702c);
+  box-shadow:0 2px 6px rgba(90,70,30,.25)}
+.m-line{min-width:74px;display:flex;justify-content:center}
+.m-label{font-size:13px;color:var(--ink);min-width:56px}
 /* yao lines */
 .yao{width:74px;height:12px;margin:0 auto}
 .yao.yang{background:var(--ink);border-radius:6px;height:10px;margin-top:1px}

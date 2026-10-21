@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>六爻排盘</title>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <div class="wrap">
@@ -22,6 +22,7 @@
   <button class="tab active" data-tab="coin">铜钱摇卦</button>
   <button class="tab" data-tab="time">时间起卦</button>
   <button class="tab" data-tab="num">数字起卦</button>
+  <button class="tab" data-tab="manual">手动录入</button>
 </nav>
 
 <!-- ============ 铜钱摇卦 ============ -->
@@ -68,6 +69,17 @@
   <p class="hint">上卦＝数一÷8，下卦＝数二÷8，动爻＝(数一+数二+数三)÷6，余数按先天八卦数定卦。</p>
   <div class="row" style="margin-top:14px"><button class="btn" id="btn-num-go">起卦排盘</button></div>
   <div class="calc hidden" id="num-calc"></div>
+</section>
+
+<!-- ============ 手动录入 ============ -->
+<section class="card hidden" id="tab-manual">
+  <h2>手动录入<span class="sub">线下实摇 · 逐爻录入三枚硬币结果 · 自下而上</span></h2>
+  <p class="hint">用真实硬币（或铜钱）摇六次，每摇完一次，点下面对应爻位的三枚币，切换成「字」或「背」与实摇结果一致。六爻全部录完后点「起卦排盘」。规则与铜钱摇卦相同：字为阳（3点）· 背为阴（2点）｜三字老阳○ 三背老阴× 一字二背少阳 二字一背少阴</p>
+  <div class="m-rows" id="manual-rows"></div>
+  <div class="coin-actions" style="margin-top:16px">
+    <button class="btn" id="btn-manual-go" disabled>起卦排盘（已录 0/6 爻）</button>
+    <button class="btn ghost" id="btn-manual-clear">清空重录</button>
+  </div>
 </section>
 
 <!-- ============ 断卦参数 ============ -->
@@ -118,6 +130,7 @@
     <p><b>铜钱摇卦：</b>三枚铜钱，字为3点、背为2点。两字一背＝少阴（▬▬ ▬▬），两背一字＝少阳（▬▬▬），三字＝老阳（○，动变阴），三背＝老阴（×，动变阳）。摇六次，自初爻至上爻。</p>
     <p><b>时间起卦：</b>年取地支序数（子1…亥12），上卦＝(年+月+日)÷8取余，下卦＝(年+月+日+时)÷8取余，动爻＝总数÷6取余；余数按先天八卦数 乾1、兑2、离3、震4、巽5、坎6、艮7、坤8 定卦。</p>
     <p><b>数字起卦：</b>同上，数一为上卦、数二为下卦、三数之和定动爻。</p>
+    <p><b>手动录入：</b>线下用实物硬币摇卦后，逐爻录入每次的三枚字/背结果，计点与判爻（老阳、少阴等）与铜钱摇卦完全相同。</p>
   </div></details>
   <details class="rule"><summary>装卦规则（纳甲 · 世应 · 六亲 · 六兽 · 旬空）</summary><div class="body">
     <p><b>纳甲歌：</b>乾内甲子外壬午，坎内戊寅外戊申，艮内丙辰外丙戌，震内庚子外庚午，巽内辛丑外辛未，离内己卯外己酉，兑内丁巳外丁亥，坤内乙未外癸丑。内卦用内干支、外卦用外干支，自下而上配地支。</p>
@@ -138,6 +151,6 @@
 </div>
 <script src="lunar.js?v=2"></script>
 <script src="engine.js?v=2"></script>
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>

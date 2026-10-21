@@ -11,7 +11,7 @@ let lastReading = null;
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
   document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
   t.classList.add('active');
-  ['coin','time','num'].forEach(k => $('tab-'+k).classList.toggle('hidden', k !== t.dataset.tab));
+  ['coin','time','num','manual'].forEach(k => $('tab-'+k).classList.toggle('hidden', k !== t.dataset.tab));
 }));
 
 /* ---------- 断卦参数 ---------- */
@@ -116,6 +116,52 @@ function finishCoin() {
   renderAll(bits, moving, '铜钱摇卦', detail);
 }
 renderThrows();
+
+/* ---------- 手动录入（线下实摇，逐爻录入三枚硬币字/背） ---------- */
+const manualState = {coins: Array.from({length: 6}, () => [null, null, null])}; // true=字 false=背 null=未录
+function manualRowYao(i) {
+  const cs = manualState.coins[i];
+  return cs.every(c => c !== null) ? LY.coinYao(cs) : null;
+}
+function renderManual() {
+  const box = $('manual-rows'); box.innerHTML = '';
+  let done = 0;
+  for (let i = 0; i < 6; i++) {
+    const y = manualRowYao(i);
+    if (y) done++;
+    const row = document.createElement('div');
+    row.className = 'm-row' + (y ? ' done' : '');
+    const coinsHTML = manualState.coins[i].map((c, j) =>
+      `<button class="m-coin${c !== null ? ' set' : ''}" data-row="${i}" data-idx="${j}">${c === null ? '？' : (c ? '字' : '背')}</button>`).join('');
+    row.innerHTML =
+      `<span class="m-pos">${POS_NAMES[i]}</span><div class="m-coins">${coinsHTML}</div>` +
+      `<div class="m-line">${y ? yaoHTML(y.yang) : ''}</div>` +
+      `<span class="m-label">${y ? y.label + y.mark : '待录入'}</span>`;
+    box.appendChild(row);
+  }
+  box.querySelectorAll('.m-coin').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.row, j = +b.dataset.idx;
+    const cur = manualState.coins[i][j];
+    manualState.coins[i][j] = cur === null ? true : !cur; // 未录→字，之后字/背切换
+    renderManual();
+  }));
+  const go = $('btn-manual-go');
+  go.disabled = done < 6;
+  go.textContent = done >= 6 ? '起卦排盘' : `起卦排盘（已录 ${done}/6 爻）`;
+}
+$('btn-manual-clear').onclick = () => {
+  manualState.coins = Array.from({length: 6}, () => [null, null, null]);
+  renderManual();
+};
+$('btn-manual-go').onclick = () => {
+  const throws = manualState.coins.map(cs => ({coins: [...cs], ...LY.coinYao(cs)}));
+  const bits = throws.map(t => t.yang ? 1 : 0);
+  const moving = throws.map((t, i) => t.moving ? i + 1 : null).filter(Boolean);
+  const detail = '手动录入硬币结果（线下实摇后逐爻录入；字=3点，背=2点；三字=老阳○动变阴，三背=老阴×动变阳，两字一背=少阴，两背一字=少阳）：' +
+    throws.map((t, i) => `${POS_NAMES[i]}${t.coins.map(c => c ? '字' : '背').join('')}（${t.label}）`).join('、');
+  renderAll(bits, moving, '手动录入', detail);
+};
+renderManual();
 
 /* ---------- 顶部实时时钟（公历 + 农历 + 四柱） ---------- */
 const pad2 = n => String(n).padStart(2, '0');
